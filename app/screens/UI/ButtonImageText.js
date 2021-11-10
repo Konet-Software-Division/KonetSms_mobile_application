@@ -11,7 +11,7 @@ const ButtonImageText =props=>{
      <TouchableOpacity onPress={props.onPress}
       style={{...styles.container,...props.style}}>
           <Image
-                    source={require('../images/contacts/addcontacts.png')}
+                    source={require('../../images/contacts/addcontacts.png')}
                     style={styles.image} />
       <Text style={styles.textStyle}>{props.title}</Text> 
 
@@ -40,7 +40,7 @@ const styles=StyleSheet.create({
     },
     
    textStyle: {
-    fontFamily: 'Campton',
+    // fontFamily: 'Campton',
     fontSize: 14,
     fontWeight:'700',
     color:'white',

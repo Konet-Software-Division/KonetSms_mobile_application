@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
     },
     label: {
-        fontFamily: 'Campton-Book',
+        // fontFamily: 'Campton-Book',
         marginVertical: 8
     },
     input: {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     errorText: {
-        fontFamily: 'Campton',
+        // fontFamily: 'Campton',
         color: 'red',
         fontSize: 13
     }

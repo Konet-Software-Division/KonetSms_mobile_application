@@ -14,7 +14,7 @@ const TextCapton = props => {
 const styles = StyleSheet.create({
 
     textStyle: {
-        fontFamily: 'Campton-Black',
+        // fontFamily: 'Campton-Black',
         color: 'red',
         fontSize: 28,
         fontWeight:'700',

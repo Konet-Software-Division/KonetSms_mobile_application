@@ -6,7 +6,7 @@ import { Platform } from 'react-native';
 import SplashScreen from '../screens/intro/Splash';
 import OnboardingScreen from '../screens/intro/Onboarding';
 import LoginScreen from '../screens/intro/Login';
-// import MainfragScreen from '../screens/fragment/MainFrag'
+import MainfragScreen from '../screens/fragment/MainFrag'
 
 import Colors from '../constants/colors'
 
@@ -34,31 +34,31 @@ const MainNavigator = createStackNavigator(
       },
 
     },
-    // Onboarding: {
-    //   screen: OnboardingScreen,
-    //   navigationOptions: {
-    //     header: null,
-    //   },
+    Onboarding: {
+      screen: OnboardingScreen,
+      navigationOptions: {
+        header: null,
+      },
 
-    // },
-    // Login: {
-    //     screen: LoginScreen,
-    //     navigationOptions: {
-    //       header: null,
-    //     },
+     },
+    Login: {
+        screen: LoginScreen,
+        navigationOptions: {
+          header: null,
+        },
   
-    //   },
-    //   Mainfrag: {
-    //     screen: MainfragScreen,
-    //     navigationOptions: {
-    //       header: null,
-    //     },
+      },
+      Mainfrag: {
+        screen: MainfragScreen,
+        navigationOptions: {
+          header: null,
+        },
   
-    //   }  
+      }  
   
   }
   , {
-    initialRouteName: 'Splash',
+    initialRouteName: 'Mainfrag',
   }
 );
 

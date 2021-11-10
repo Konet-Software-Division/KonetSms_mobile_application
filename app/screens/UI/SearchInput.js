@@ -7,7 +7,7 @@ const SearchInput = props => {
     return (
         <View style={styles.searchSection}>
             <Image style={styles.image} 
-                    source={require('../images/contacts/search_normal.png')}
+                    source={require('../../images/contacts/search_normal.png')}
                     />
 
             <TextInput
