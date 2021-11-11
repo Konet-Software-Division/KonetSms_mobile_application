@@ -16,7 +16,7 @@ const renderGridItem = itemData => {
                     style={{ height: 50, width: 50 }} />
                 <View style={{ marginStart: "5%" }}>
                     <TextCapton style={{
-                        // fontFamily: 'Campton-bold',
+                        fontFamily: 'Campton-bold',
                         fontSize: 14, fontWeight: '700'
                     }} text={itemData.item.customer} />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.contact} />

@@ -12,7 +12,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 // import Home from '../fragment/Home'
 import Home from './Home'
 import Contacts from './Contacts'
-import Report from './Contacts'
+import Report from './Report'
 
 
 const Tab = createBottomTabNavigator();
