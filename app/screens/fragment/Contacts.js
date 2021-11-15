@@ -64,7 +64,7 @@ const renderContactGridItem = itemData => {
 };
 
 
-const Contacts = () => {
+const Contacts = ({ navigation }) => {
     const [Contact, setContact] = useState([]);
     const [Groups, setGroups] = useState([]);
     const [ContactState, setContactState] = useState(true);

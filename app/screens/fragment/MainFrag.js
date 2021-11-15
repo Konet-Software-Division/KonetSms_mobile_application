@@ -13,7 +13,19 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Home from './Home'
 import Contacts from './Contacts'
 import Report from './Report'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+const ReportStack = createNativeStackNavigator();
+
+  const ReortStackScreen= () => {
+  return (
+    <ReportStack.Navigator 
+    screenOptions={{ headerShown: false, tabBarShowLabel:false }}    >
+      <ReportStack.Screen name="Home" component={Report} />
+      <ReportStack.Screen name="Details" component={Contacts} />
+    </ReportStack.Navigator>
+  );
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -62,7 +74,7 @@ const MainFrag= () => {
           }}/>
                      <Tab.Screen
           name="Report"
-          component={Report}
+          component={ReortStackScreen}
           options={{
             title: '', //Set Header Title
             tabBarIcon: ({ focused }) => (

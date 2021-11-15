@@ -36,7 +36,8 @@ const renderGridItem = itemData => {
 };
 
 
-const Home = () => {
+const Home = ({ navigation })  => {
+    
     const [Groups, setGroups] = useState([]);
 
     useEffect(() => {       
