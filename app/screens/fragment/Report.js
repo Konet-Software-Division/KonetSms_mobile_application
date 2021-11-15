@@ -5,30 +5,74 @@ import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
 import SmsModel from '../../model/SmsModel';
 
+const renderTransactionGridItem = itemData => {
+  return (
+        <View style={[styles.groups, { backgroundColor: itemData.item.id%2==0?Colors.grey:'white' }]}>
 
-const renderContactGridItem = itemData => {
+          <View style={styles.groups_first}>
+              <Image
+                  source={require('../../images/report/transations.png')}
+                  style={{ height: 40, width: 40 }} />
+              <View style={{ marginStart: "15%" }}>
+              <View style={{flexDirection: 'row'}} >
+                  <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="ID: " />
+                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.idsms} />
+                  </View>
+                  <View style={{flexDirection: 'row'}} >
+                  <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Units: " />
+                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.cost} />
+                  </View>
+              </View>
+          </View>
+          <View style={styles.groups_first}>
+              
+              <View style={{ marginStart: "1%" }}>
+              <View style={{flexDirection: 'row'}} >
+              <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Date: " />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.date} />
+                    </View>
+                    <View style={{flexDirection: 'row'}} >
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Amount: " />
+                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.pageNo} />
+                  </View>
+               
+              </View>
+          </View>
+
+      </View>
+  );
+};
+const renderSmsGridItem = itemData => {
     return (
-        <View style={styles.groups}>
+          <View style={[styles.groups, { backgroundColor: itemData.item.id%2==0?Colors.grey:'white' }]}>
+
             <View style={styles.groups_first}>
                 <Image
-                    source={require('../../images/contacts/profile_image2.png')}
+                    source={require('../../images/report/sms.png')}
                     style={{ height: 40, width: 40 }} />
                 <View style={{ marginStart: "15%" }}>
-                 
+                <View style={{flexDirection: 'row'}} >
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="ID: " />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.idsms} />
-                    <TextCapton style={{
-                        fontSize: 14, fontWeight: '500',
-                    }} text={itemData.item.cost} />
+                    </View>
+                    <View style={{flexDirection: 'row'}} >
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Units: " />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.cost} />
+                    </View>
                 </View>
             </View>
             <View style={styles.groups_first}>
                 
                 <View style={{ marginStart: "1%" }}>
-                 
+                <View style={{flexDirection: 'row'}} >
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Date: " />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.date} />
-                    <TextCapton style={{
-                        fontSize: 14, fontWeight: '500',
-                    }} text={itemData.item.pageNo} />
+                    </View>
+                    <View style={{flexDirection: 'row'}} >
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="No. of Pages: " />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.pageNo} />
+                    </View>
+                 
                 </View>
             </View>
 
@@ -37,37 +81,50 @@ const renderContactGridItem = itemData => {
 };
 
 const renderTabBar = props => (
-  <TabBar
+  <TabBar 
       {...props}
       activeColor={Colors.primary}
       inactiveColor={Colors.primary}
-      style={{marginTop:25,backgroundColor:'white'}}
-      indicatorStyle={{backgroundColor:Colors.lightblue, height:4}}
+      style={{marginTop:25,backgroundColor:'white',marginRight:30,marginLeft:30}}
+      indicatorStyle={{backgroundColor:Colors.lightblue, height:4
+      }}
   />
 );
 
 const Report = () => {
   const [Sms, setSms] = useState([]);
+  const [Transaction, setTransaction] = useState([]);
+
   useEffect(() => {
     setSms([
-        new SmsModel('1','254599', 'Thu Jun 03 2021', '2 Units', '08099267871'),
-        new SmsModel('2','498099','Thu Jun 03 2021', ' 6 Units', '08001263316'),
-        new SmsModel('3','428599' ,'Thu Jun 03 2021', ' 3 Units', '08099269815'),
-        new SmsModel('4','901599', 'Thu Jun 03 2021', ' 5 Units', '08099167875'),
-
+        new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4'),
+        new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3'),
+        new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2'),
+        new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1'),
     ])
+    setTransaction([
+      new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4'),
+      new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3'),
+      new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2'),
+      new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1'),
+  ])
 }, [])
   const SMS = () => (
     <FlatList
     keyExtractor={(item, index) => item.id}
     data={Sms}
-    renderItem={renderContactGridItem}
+    renderItem={renderSmsGridItem}
     numColumns={1}
   />
   );
   
   const Transactions = () => (
-    <View style={{ flex: 1}} />
+     <FlatList
+    keyExtractor={(item, index) => item.id}
+    data={Sms}
+    renderItem={renderTransactionGridItem}
+    numColumns={1}
+  />
     
   );
   
@@ -86,7 +143,7 @@ const Report = () => {
   return (
     <View style={styles.container}>
     <View style={styles.container_header}>
-        <TextCapton style={{ fontSize: 24, fontWeight: '700' }} text="Reports" />
+        <TextCapton style={{ fontSize: 24, fontWeight: '700',marginLeft:30 }} text="Reports" />
         
     </View>
     <TabView
@@ -105,8 +162,6 @@ export default Report
 const styles = StyleSheet.create({
   container: {
       flex: 1,
-      paddingLeft: '7%',
-      paddingRight: '7%',
       marginTop: '20%',
       flexDirection: 'column',
       backgroundColor:'white'
@@ -115,16 +170,18 @@ const styles = StyleSheet.create({
   groups: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: '5%',
     flexDirection: 'row',
-    height: 20,
+    height: 70,
     width: "100%",
-    marginTop: 45
+    marginTop: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
 },
 groups_first: {
     alignItems: 'center',
     flexDirection: 'row',
     width: "50%",
+    
 },
   container_header: {
       alignItems: 'baseline',

@@ -5,6 +5,8 @@ import Navigator from './navigation/Navigator';
 
 const App  = () => (
   <Navigator />
+  // <Tabs />
+
 );
 
 const styles = StyleSheet.create({

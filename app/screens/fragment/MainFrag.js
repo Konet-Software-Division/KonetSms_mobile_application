@@ -96,6 +96,7 @@ const MainFrag= () => {
                   </View>
             ),
           }}/>
+     
         </Tab.Navigator>
       </NavigationContainer>
   );
