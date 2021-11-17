@@ -4,9 +4,17 @@ import { Text, View, StyleSheet,useWindowDimensions,FlatList,Image } from 'react
 import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
 import SmsModel from '../../model/SmsModel';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
+
+const Report = () => {
 const renderTransactionGridItem = itemData => {
+  
   return (
+    <TouchableOpacity  onPressIn={() => navigation.navigate('ReportDetails',{
+    props: itemData})
+  }>
         <View style={[styles.groups, { backgroundColor: itemData.item.id%2==0?Colors.grey:'white' }]}>
 
           <View style={styles.groups_first}>
@@ -40,7 +48,8 @@ const renderTransactionGridItem = itemData => {
           </View>
 
       </View>
-  );
+      </TouchableOpacity>
+  )
 };
 const renderSmsGridItem = itemData => {
     return (
@@ -91,7 +100,8 @@ const renderTabBar = props => (
   />
 );
 
-const Report = () => {
+
+  const navigation = useNavigation(); 
   const [Sms, setSms] = useState([]);
   const [Transaction, setTransaction] = useState([]);
 

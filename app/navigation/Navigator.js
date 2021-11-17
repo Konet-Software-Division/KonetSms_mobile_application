@@ -7,7 +7,6 @@ import SplashScreen from '../screens/intro/Splash';
 import OnboardingScreen from '../screens/intro/Onboarding';
 import LoginScreen from '../screens/intro/Login';
 import MainfragScreen from '../screens/fragment/MainFrag'
-import TabsScreen from '../screens/fragment/Tabs'
 
 
 import Colors from '../constants/colors'

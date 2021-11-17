@@ -9,10 +9,10 @@ import {
 
 import {NavigationContainer} from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-// import Home from '../fragment/Home'
 import Home from './Home'
 import Contacts from './Contacts'
 import Report from './Report'
+import ReportDetails from './ReportDetails'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const ReportStack = createNativeStackNavigator();
@@ -21,8 +21,8 @@ const ReportStack = createNativeStackNavigator();
   return (
     <ReportStack.Navigator 
     screenOptions={{ headerShown: false, tabBarShowLabel:false }}    >
-      <ReportStack.Screen name="Home" component={Report} />
-      <ReportStack.Screen name="Details" component={Contacts} />
+      <ReportStack.Screen name="Report" component={Report} />
+      <ReportStack.Screen name="ReportDetails" component={ReportDetails} />
     </ReportStack.Navigator>
   );
 }
