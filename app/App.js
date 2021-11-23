@@ -1,7 +1,6 @@
 import React from 'react';
 import {ImageBackground,StyleSheet} from 'react-native';
 import Navigator from './navigation/Navigator';
-import ReportDetails from '../app/screens/fragment/ReportDetails'
 
 
 const App  = () => (

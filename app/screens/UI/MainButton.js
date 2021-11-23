@@ -23,7 +23,9 @@ const styles=StyleSheet.create({
        paddingHorizontal:30,
        borderRadius:10,  
        elevation:3,
-       color:Colors.primary
+       color:Colors.primary,
+       alignItems: 'center',
+       justifyContent: 'center',
    },
    buttonText:{
     fontSize: 16,

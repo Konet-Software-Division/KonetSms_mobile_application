@@ -7,6 +7,7 @@ import SplashScreen from '../screens/intro/Splash';
 import OnboardingScreen from '../screens/intro/Onboarding';
 import LoginScreen from '../screens/intro/Login';
 import MainfragScreen from '../screens/fragment/MainFrag'
+import NewContactScreen from '../screens/otherscreen/NewContact'
 
 
 import Colors from '../constants/colors'
@@ -49,17 +50,23 @@ const MainNavigator = createStackNavigator(
         },
   
       },
-      Mainfrag: {
+    Mainfrag: {
         screen: MainfragScreen,
         navigationOptions: {
           header: null,
         },
   
       },  
+    NewContact: {
+        screen: NewContactScreen,
+        navigationOptions: {
+          header: null,
+        },
   
+      }, 
   
   }, {
-    initialRouteName: 'Mainfrag',
+    initialRouteName: 'NewContact',
   }
 );
 

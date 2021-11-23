@@ -56,8 +56,6 @@ const Login  = () => (
                         <InputText
                             value={values.password}
                             defaultValue='' 
-                            errors={errors.username}
-                            touched={touched.username}
                             onChangeText={handleChange('password')}
                             placeholder="Password"
                             onBlur={() => setFieldTouched('password')}
@@ -127,8 +125,6 @@ const styles = StyleSheet.create({
     button: {
         height: 44,
         width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: Colors.primary
     },
     authContainer: {

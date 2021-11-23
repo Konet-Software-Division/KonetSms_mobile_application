@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { View, StyleSheet,Image,TouchableOpacity,Text } from 'react-native';
+import { View, StyleSheet,Image,TouchableOpacity,Text,Button } from 'react-native';
 import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
+import PopUpModal from '../UI/PopUpModal';
 import { useNavigation } from '@react-navigation/native';
 
 
 const ReportDetails =({ route }) => {
+    const [isModalVisible, setIsModalVisible] = useState(false)
+
+  
+  
+    const handleSignUp = () => {
+      // sign up the user and close the modal
+      setIsModalVisible(!isModalVisible);
+    };
+  
   const navigation = useNavigation();
   const { props} = route.params;
 
@@ -54,13 +64,19 @@ const ReportDetails =({ route }) => {
 <TextCapton style={{ fontSize: 14, fontWeight: '700',marginTop:40 }} text="Message: " />
 <TextCapton style={{ fontSize: 14, fontWeight: '400',marginTop:40 }} text='Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.' />
 
-<TouchableOpacity > 
+<TouchableOpacity onPress={handleSignUp}> 
 <View style={{ flexDirection: 'row', marginTop:50,justifyContent: 'center'}}> 
 <Image source={require('../../images/report/trash.png')}
                     style={{ height: 18, width: 18}} />
 <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="  Delete Message" />
 </View>
 </TouchableOpacity>
+<View>
+<View>
+    </View>
+    </View>
+    
+    <PopUpModal visible={isModalVisible} setVisible={handleSignUp}/>
    </View>
   );
 }

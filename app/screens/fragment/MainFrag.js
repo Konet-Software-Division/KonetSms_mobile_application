@@ -12,7 +12,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Home from './Home'
 import Contacts from './Contacts'
 import Report from './Report'
-import ReportDetails from './ReportDetails'
+import ReportDetails from '../otherscreen/ReportDetails'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const ReportStack = createNativeStackNavigator();
