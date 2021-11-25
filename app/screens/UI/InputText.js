@@ -37,7 +37,7 @@ const InputText = (props) => {
 const styles = StyleSheet.create({
     formControl: {
         width: '100%',
-        marginBottom:15
+        marginBottom:10
 
     },
     label: {
