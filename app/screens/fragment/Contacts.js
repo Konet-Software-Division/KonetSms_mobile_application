@@ -5,6 +5,8 @@ import SearchInput from '../UI/SearchInput';
 import ContactModel from '../../model/ContactModel';
 import GroupsModel from '../../model/GroupsModel';
 import Colors from '../../constants/colors'
+import ButtonImageText from '../UI/ButtonImageText';
+
 
 const renderGroupGridItem = itemData => {
     return (
