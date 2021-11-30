@@ -2,7 +2,16 @@ import React from 'react';
 import {ImageBackground,Image, Text,StyleSheet, View} from 'react-native';
  
  
- const Splash  = () => (
+ const Splash  = () => {
+  useEffect(() => {
+   
+           setTimeout(() => {
+        setShowSplash(false)
+      },5000)
+    });
+  const [showSplash, setShowSplash] = useState(true);
+
+   return(
     <View style={styles.container}>
     <ImageBackground 
        source={require('../../images/splash_screen.png')}
@@ -10,6 +19,7 @@ import {ImageBackground,Image, Text,StyleSheet, View} from 'react-native';
 
      </View>
  );
+ }
  
  const styles = StyleSheet.create({
    container: {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
 import TextCapton from '../UI/TextCapton';
-import ButtonImageText from '../UI/ButtonImageText';
 import SearchInput from '../UI/SearchInput';
 import ContactModel from '../../model/ContactModel';
 import GroupsModel from '../../model/GroupsModel';

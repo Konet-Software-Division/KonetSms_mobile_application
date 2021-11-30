@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet,Button,Image } from 'react-native';
+import { Text, View, StyleSheet,Image,TextInput } from 'react-native';
+import CheckBox from '@react-native-community/checkbox'
 import Colors from '../../constants/colors'
 import InputText from '../UI/InputText';
 import calender from '../../images/calendar.png'
 import dropdown from '../../images/dropdown.png'
 import MainButton from '../UI/MainButton';
-import { ScrollView } from 'react-native-gesture-handler';
-import Dropdownlist from './Dropdownlist'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import Darkdropdown from '../UI/Darkdropdown'
 import TextCapton from '../UI/TextCapton';
 
 
 
 
-const NewContact =(props) => {
+const SendMessage =(props) => {
+    const [isSelected, setSelection] = useState(false);
+
     const [selectedLanguage, setSelectedLanguage] = useState();
 
 
@@ -22,6 +25,7 @@ const NewContact =(props) => {
     const [Gender, Setgender]=useState("");
     const [Birth, Setbirth]=useState("");
     const [Group, SetGroup]=useState("");
+    const [checked, setchecked]= useState(false)
     const options = [
         {
           label: 'Male',
@@ -35,57 +39,95 @@ const NewContact =(props) => {
     return (
           <View style={styles.container}>
 <View style={styles.header}>
-<Image
-          source={require('../../images/white_back.png')}
-                    style={{height:20,width:10,     alignSelf:'center' }} />
 
 
-<TextCapton style={styles.header_text} text="New Contact" />
 
-<Image
-          source={require('../../images/white_back.png')}
-                    style={{height:0,width:0,     alignSelf:'center' }} />
+<TextCapton style={styles.header_text} text="Send Message" />
+
+
                     
 </View>
 <ScrollView>
 
-<View style={{paddingHorizontal:20}}>
+<View style={{paddingHorizontal:20,paddingTop:50}}>
 
-<Image
-                    source={require('../../images/contacts/profile_image.png')}
-                    style={styles.image} />
-                    
+
                      <InputText
                             value={Firstname}
                             defaultValue='' 
-                            placeholder="First Name"
+                            placeholder="Message Title"
                             onChangeText={text => Setfirstname(text)}
                         />
                     <InputText
                             value={Lastname}
                             defaultValue='' 
-                            placeholder="Last Name"
+                            placeholder="Sender’s Name"
                             onChangeText={text => Setlastname(text)}
                         />
                                              <InputText
                             value={Phonenumber}
                             defaultValue='' 
-                            placeholder="Phone Number"
+                            placeholder="Sender’s Number"
                             onChangeText={text => Setphonenumber(text)}
                         />
+           <TextCapton style={{fontSize: 14, fontWeight:'500', color:Colors.primary
+        }} text="Recipients"/>             
                         
-
-      <Dropdownlist title={"Gender"} options={options}/>
+      <Darkdropdown  droptitle={"Add Contact Manually"}
+      options={options}/>
            
-      <Dropdownlist title={"Select a Group"} options={options}/>
+      <Darkdropdown droptitle={"Select Group"} options={options}/>
+      <Darkdropdown droptitle={"List Contacts"} options={options}/>
 
-                             <MainButton
+<View style={{justifyContent:'space-between',flexDirection:'row',marginTop:20, marginBottom:10}}>
+<TextCapton style={{fontSize: 14, fontWeight:'700', 
+        }} text="Message"/>
+<TextCapton style={{fontSize: 14, fontWeight:'700', color:Colors.lightblue
+        }} text="Personalize"/>
+</View>
+
+               <TextInput
+        style={styles.input}
+        value={Group}
+        multiline={true}
+        onChangeText={text => SetGroup(text)}
+        numberOfLines={4}
+   />
+       <View style={styles.checkboxContainer}>
+       {!checked &&
+       <TouchableOpacity onPress={() => setchecked(!checked)}>
+       <Image source={require('../../images/checkbox.png')} 
+                     style={{ width: 15, height: 15, resizeMode: 'contain'}}  />
+       </TouchableOpacity>
+       }
+       {checked &&
+        <TouchableOpacity onPress={() => setchecked(!checked)}
+        >
+        <Image source={require('../../images/checkbox.png')} 
+                      style={{ width: 15, height: 15, resizeMode: 'contain'}}  />
+        </TouchableOpacity>
+       }
+       <TextCapton style={{fontSize: 14, fontWeight:'500',  color:Colors.primary, marginLeft:30
+        }}  text="Schedule Send"/>
+      </View>
+<MainButton
                             style={{
-                                ...styles.button, backgroundColor: Colors.primary,
+                                ...styles.button, backgroundColor: Colors.lightblue,
                                 marginVertical: 20
                             }}
                             onPress={() => {
                                 navData.navigation.navigate('Login');
+                            }}
+                        >
+                            <Text>Save as Template</Text>
+                        </MainButton>  
+                             <MainButton
+                            style={{
+                                ...styles.button, backgroundColor: Colors.primary,
+                            }}
+                            onPress={() => {
+                                
+                                navigation.navigate('Login');
                             }}
                         >
                             <Text>Create</Text>
@@ -145,6 +187,7 @@ const styles = StyleSheet.create({
     input: {
         paddingVertical: 5,
         width: '100%',
+        height:150,
         borderRadius:10,
         marginTop: 10,
         marginBottom: 20,
@@ -168,6 +211,11 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
     },
-  
+    
+    checkboxContainer: {
+        flex:1,
+        flexDirection: "row",
+        alignItems:'center'
+      },
   });
-export default NewContact
+export default SendMessage

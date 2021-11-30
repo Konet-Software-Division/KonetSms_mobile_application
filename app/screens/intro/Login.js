@@ -9,9 +9,16 @@ import * as yup from 'yup'
 import { Formik } from 'formik'
 import { ScrollView } from 'react-native-gesture-handler';
 import TextCapton from '../UI/TextCapton';
+import { createStackNavigator, createAppContainer } from 'react-navigation';  
 
 
-const Login  = () => (
+ 
+const Login  = ({ navigation })  => {
+    
+  
+    return (
+
+
 <ScrollView style={{ backgroundColor: '#fff'}}>
 <View style={styles.container}>
 <Image
@@ -69,7 +76,9 @@ const Login  = () => (
                                 marginVertical: 20
                             }}
                             onPress={() => {
-                                navData.navigation.navigate('Login');
+                                navigation.navigate('MainfragScreen')
+
+                                // navData.navigation.navigate('Login');
                             }}
                         >
                             <Text>Login</Text>
@@ -87,6 +96,7 @@ const Login  = () => (
         </View>
         </ScrollView>
     );
+};
 
 
 export default Login

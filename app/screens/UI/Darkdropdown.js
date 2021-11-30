@@ -4,24 +4,21 @@ import { CustomPicker } from 'react-native-custom-picker'
 import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
 
-  const Dropdownlist =props => {
 
-  
+const Darkdropdown =props => {
+
 
   renderField =(settings) =>{
     const { selectedItem, defaultText, getLabel, clear } = settings
     return (
       <View>
-      <TextCapton style={{fontSize: 14, fontWeight:'700', textAlign: 'left'
-        }} text={props.title}/>
 
-      <View style={styles.container}>
+      <View style={styles.container} >
         <View>
           {!selectedItem && <View style={{flexDirection:'row',justifyContent:'space-between',
         alignItems:'center'}}>
-           <Text ></Text>
-
-            <Text >{defaultText}</Text>
+<TextCapton style={{fontSize: 14, fontWeight:'500', color:Colors.primary, marginLeft:15
+        }} text={defaultText}/>
             <Image source={require('../../images/dropdown.png')}
                      style={{ width: 15, height: 15, resizeMode: 'contain'}}  />
             </View>}
@@ -58,7 +55,7 @@ import TextCapton from '../UI/TextCapton';
   return (
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
         <CustomPicker
-          placeholder={'Select your gender..'}
+          placeholder={props.droptitle}
           options={props.options}
           getLabel={item => item.label}
           fieldTemplate={renderField}
@@ -71,7 +68,7 @@ import TextCapton from '../UI/TextCapton';
     )
   
 }
-export default Dropdownlist
+export default Darkdropdown
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +77,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 10,
     marginBottom: 20,
-    backgroundColor:Colors.grey,
+    backgroundColor:'rgba(10, 4, 60, 0.3)',
     borderColor:Colors.inputbodercolor,
     borderRadius:10,
   },

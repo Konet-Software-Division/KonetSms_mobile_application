@@ -5,7 +5,7 @@ import TextCapton from '../UI/TextCapton';
 import Colors from '../../constants/colors'
 
  
- const Onboarding  = () => (
+ const Onboarding  = ({navigation}) => (
     <View style={styles.container}>
     <View style={styles.top}>
     <Image
@@ -23,6 +23,9 @@ import Colors from '../../constants/colors'
     <View style={{width:"70%", marginTop:"5%"}} >
     <MainButton
                                 style={{borderRadius:30,  backgroundColor: Colors.primary }}
+                                onPress={() => {
+                                  navigation.navigate('Mainfrag')
+                              }}
                             >
                                 <Text>Get Started
                        </Text>

@@ -5,5 +5,7 @@ export default {
     grey:'#F9F9F9',
     inputbodercolor:'#EBEBEB',
     lightblue: '#0098DA',
-    darkgrey:'#C4C4C4'
+    darkgrey:'#C4C4C4', 
+    dropdowndrak:'#0A043C4D'
+
 }
