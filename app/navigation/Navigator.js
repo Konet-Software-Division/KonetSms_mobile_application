@@ -8,8 +8,6 @@ import OnboardingScreen from '../screens/intro/Onboarding';
 import LoginScreen from '../screens/intro/Login';
 import MainfragScreen from '../screens/fragment/MainFrag'
 import NewContactScreen from '../screens/otherscreen/SendMessage'
-
-
 import Colors from '../constants/colors'
 
 
@@ -40,22 +38,22 @@ const MainNavigator = createStackNavigator(
     //   },
 
     // },
-    Onboarding: {
-      screen: OnboardingScreen,
-      navigationOptions: {
-        header: null,
-        headerShown: false
-      },
+    // Onboarding: {
+    //   screen: OnboardingScreen,
+    //   navigationOptions: {
+    //     header: null,
+    //     headerShown: false
+    //   },
 
-     },
-    Login: {
-        screen: LoginScreen,
-        navigationOptions: {
-          header: null,
-          headerShown: false,
-        },
+    //  },
+    // Login: {
+    //     screen: LoginScreen,
+    //     navigationOptions: {
+    //       header: null,
+    //       headerShown: false,
+    //     },
   
-      },
+    //   },
     Mainfrag: {
         screen: MainfragScreen,
         navigationOptions: {

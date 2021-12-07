@@ -46,7 +46,7 @@ const renderContactGridItem = itemData => {
                     style={{ height: 40, width: 40 }} />
                 <View style={{ marginStart: "15%" }}>
                     <TextCapton style={{
-                        fontFamily: 'Campton-bold',
+                        // fontFamily: 'Campton-bold',
                         fontSize: 14, fontWeight: '700',
                     }} text={itemData.item.name} />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.phone} />

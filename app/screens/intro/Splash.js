@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {ImageBackground,Image, Text,StyleSheet, View} from 'react-native';
  
  
- const Splash  = () => {
+ const Splash  = ({navigation}) => {
   useEffect(() => {
+ 
+    setTimeout(function() {
+      navigation.navigate('Onboarding')
+   }, 2000);
    
-           setTimeout(() => {
-        setShowSplash(false)
-      },5000)
-    });
-  const [showSplash, setShowSplash] = useState(true);
+ }, []);
 
    return(
     <View style={styles.container}>

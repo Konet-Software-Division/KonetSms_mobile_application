@@ -10,7 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const PopUpModal =prop => {
-    const navigation = useNavigation();
 return (
 <Modal isVisible={prop.visible}  style={{alignSelf:'center',}}>
 <TouchableWithoutFeedback onPress={prop.setVisible}> 
@@ -28,12 +27,8 @@ message history?' />
                             <Text>Yes</Text>
                         </MainButton>
 <MainButton style={{...styles.butt,backgroundColor:Colors.primary}}
-
-    // backgroundColor:  Colors.primary, 
-
-                         
                             onPress={() => {
-                               navigation.goBack()
+                                prop.setVisible()
                             }}
                         >
                             <Text>No</Text>

@@ -6,6 +6,7 @@ import Colors from '../../constants/colors'
 
  
  const Onboarding  = ({navigation}) => (
+   
     <View style={styles.container}>
     <View style={styles.top}>
     <Image

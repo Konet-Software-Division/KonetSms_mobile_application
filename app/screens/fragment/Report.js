@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { Text, View, StyleSheet,useWindowDimensions,FlatList,Image } from 'react-native';
+import { View, StyleSheet,useWindowDimensions,FlatList,Image } from 'react-native';
 import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
 import SmsModel from '../../model/SmsModel';
@@ -64,7 +64,7 @@ const renderSmsGridItem = itemData => {
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="ID: " />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.idsms} />
                     </View>
-                    <View style={{flexDirection: 'row'}} >
+                    <View style={{flexDirection: 'row',marginTop:5}} >
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Units: " />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.cost} />
                     </View>
@@ -77,11 +77,13 @@ const renderSmsGridItem = itemData => {
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Date: " />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.date} />
                     </View>
-                    <View style={{flexDirection: 'row'}} >
+                    <View style={{flexDirection: 'row',marginTop:5}} >
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="No. of Pages: " />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.pageNo} />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text={itemData.item.pageNo} />
+                   
+                    <TextCapton style={{ marginLeft:8,fontSize: 14, fontWeight: '700' }} text="Vol. " />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text={itemData.item.vol} />
                     </View>
-                 
                 </View>
             </View>
 
@@ -107,10 +109,10 @@ const renderTabBar = props => (
 
   useEffect(() => {
     setSms([
-        new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4'),
-        new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3'),
-        new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2'),
-        new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1'),
+        new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4','2'),
+        new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3','2'),
+        new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2','1'),
+        new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1','5'),
     ])
     setTransaction([
       new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4'),
@@ -184,8 +186,8 @@ const styles = StyleSheet.create({
     height: 70,
     width: "100%",
     marginTop: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
+    paddingLeft: 20,
+    paddingRight: 20,
 },
 groups_first: {
     alignItems: 'center',
