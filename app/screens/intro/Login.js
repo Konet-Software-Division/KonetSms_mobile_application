@@ -4,21 +4,43 @@ import MainButton from '../UI/MainButton';
 import InputText from '../UI/InputText';
 
 import Colors from '../../constants/colors'
-import { Text, Alert, View, StyleSheet, Image} from 'react-native';
+import { Text, ActivityIndicator, View, StyleSheet, Image} from 'react-native';
 import * as yup from 'yup'
 import { Formik } from 'formik'
 import { ScrollView } from 'react-native-gesture-handler';
 import TextCapton from '../UI/TextCapton';
-import { createStackNavigator, createAppContainer } from 'react-navigation';  
+import CustomSpinner from '../UI/CustomSpinner';
+import * as loginNetworks from '../../network/LoginNetworks';
 
 
  
 const Login  = ({ navigation })  => {
+    const [IsLoading, setIsLoading]=useState(false);
+    const authHandler = async (values) => {
+     loginNetworks.login(
+            values.username,
+            values.password
+        );
+        setIsLoading(true)
+        try {
+            navigation.navigate('MainfragScreen')
+            setIsLoading(false)
+        } catch (err) {
+            setError(err.message);
+            toast.show("Task finished successfully", {
+                type: "danger",
+                placement: "top",
+                duration: 4000,
+                offset: 30,
+                animationType: "slide-in | zoom-in",
+              });
+            setIsLoading(false);
+
+        }
     
-  
+    };
+    
     return (
-
-
 <ScrollView style={{ backgroundColor: '#fff'}}>
 <View style={styles.container}>
 <Image
@@ -69,15 +91,13 @@ const Login  = ({ navigation })  => {
                             secureTextEntry={true}
                         />
                        
-
                         <MainButton
                             style={{
                                 ...styles.button, backgroundColor: Colors.primary,
                                 marginVertical: 20
                             }}
                             onPress={() => {
-                                navigation.navigate('MainfragScreen')
-
+                                // navigation.navigate('MainfragScreen')
                                 // navData.navigation.navigate('Login');
                             }}
                         >
@@ -87,9 +107,11 @@ const Login  = ({ navigation })  => {
                 </View>
             )}
         </Formik>
-        
+
+
         <View style={styles.passwordview}>
         <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.primary}} text="Forgot password?"/>
+        <CustomSpinner visible={IsLoading}/>
         <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.lightblue}} text="Reset here"/>
 
         </View>

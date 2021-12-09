@@ -42,14 +42,14 @@ const MainNavigator = createStackNavigator(
     //   },
 
     //  },
-    // Login: {
-    //     screen: LoginScreen,
-    //     navigationOptions: {
-    //       header: null,
-    //       headerShown: false,
-    //     },
+    Login: {
+        screen: LoginScreen,
+        navigationOptions: {
+          header: null,
+          headerShown: false,
+        },
   
-    //   },
+      },
     Mainfrag: {
         screen: MainfragScreen,
         navigationOptions: {

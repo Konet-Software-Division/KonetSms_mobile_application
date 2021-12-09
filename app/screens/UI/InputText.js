@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignContent:'center',
         borderWidth: 1,
-        paddingHorizontal:15,
         paddingVertical:10,
         flexDirection:'row',
         backgroundColor:Colors.grey,
