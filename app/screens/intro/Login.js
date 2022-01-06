@@ -4,45 +4,46 @@ import MainButton from '../UI/MainButton';
 import InputText from '../UI/InputText';
 
 import Colors from '../../constants/colors'
-import { Text, ActivityIndicator, View, StyleSheet, Image} from 'react-native';
+import { Text, ToastAndroid, View, StyleSheet, Image} from 'react-native';
 import * as yup from 'yup'
 import { Formik } from 'formik'
 import { ScrollView } from 'react-native-gesture-handler';
 import TextCapton from '../UI/TextCapton';
 import CustomSpinner from '../UI/CustomSpinner';
 import * as loginNetworks from '../../network/LoginNetworks';
-
+import Snackbar from 'react-native-snackbar';
 
  
-const Login  = ({ navigation })  => {
+const Login  = ({navigation})  => {
+
     const [IsLoading, setIsLoading]=useState(false);
-    const authHandler = async (values) => {
-     loginNetworks.login(
-            values.username,
-            values.password
-        );
+
+    CustomsnackBar=(message)  => {
+        Snackbar.show({ text: message, textColor: 'red',
+        backgroundColor: 'black' })
+    }
+    const handleSubmit = async (values) => {
         setIsLoading(true)
         try {
-            navigation.navigate('MainfragScreen')
+           await   loginNetworks.login(
+                values.email,
+                values.password
+            );
             setIsLoading(false)
+        navigation.navigate('MainFrag')
+
         } catch (err) {
-            setError(err.message);
-            toast.show("Task finished successfully", {
-                type: "danger",
-                placement: "top",
-                duration: 4000,
-                offset: 30,
-                animationType: "slide-in | zoom-in",
-              });
-            setIsLoading(false);
+            CustomsnackBar(err.message)
+            setIsLoading(false)
 
         }
     
-    };
+     }
     
     return (
 <ScrollView style={{ backgroundColor: '#fff'}}>
 <View style={styles.container}>
+    
 <Image
        source={require('../../images/konetsms.png')}
      style={styles.image}/>
@@ -52,54 +53,55 @@ const Login  = ({ navigation })  => {
 
         <Formik
             initialValues={{
-                username: '',
+                email: '',
                 password: ''
             }}
-             onSubmit={values  => {authHandler(values)}}
+             onSubmit={values  => {handleSubmit(values)}}
             validationSchema={yup.object().shape({
-                username: yup
-                    .string(),
-                //     .min(4)
-                // .required('Please, provide your username!'),
+                email: yup
+                    .string()
+                    .min(4)
+                .required('Please, provide your email!'),
 
                 password: yup
                     .string()
-                // .min(4)
-                // .max(20, 'Password should not excced 10 chars.')
-                // .required(),
+                .min(4)
+                .max(20, 'Password should not excced 10 chars.')
+                .required(),
             })}
         >
             {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
                 <View style={styles.container_form} >
                         <InputText
-                            value={values.username}
-                            defaultValue='' 
-                            errors={errors.username}
-                            touched={touched.username}
-                            onChangeText={handleChange('username')}
-                            onBlur={() => setFieldTouched('username')}
-                            placeholder="username"
+                            value={values.email}
+                            defaultValue='jibola@gmail.com' 
+                            errors={errors.email}
+                            touched={touched.email}
+                            onChangeText={handleChange('email')}
+                            onBlur={() => setFieldTouched('email')}
+                            placeholder="email"
                         />
                     
 
                         <InputText
-                            value={values.password}
-                            defaultValue='' 
+                          value={values.password}
+                          defaultValue='1234567890' 
+                          errors={errors.password}
+                          touched={touched.password}
                             onChangeText={handleChange('password')}
                             placeholder="Password"
                             onBlur={() => setFieldTouched('password')}
                             secureTextEntry={true}
                         />
-                       
+                    
                         <MainButton
                             style={{
                                 ...styles.button, backgroundColor: Colors.primary,
                                 marginVertical: 20
                             }}
-                            onPress={() => {
-                                // navigation.navigate('MainfragScreen')
-                                // navData.navigation.navigate('Login');
-                            }}
+                            onPress={handleSubmit}
+                             // navigation.navigate('MainfragScreen')
+                             // navData.navigation.navigate('Login');
                         >
                             <Text>Login</Text>
                         </MainButton>

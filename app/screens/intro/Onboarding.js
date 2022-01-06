@@ -25,7 +25,7 @@ import Colors from '../../constants/colors'
     <MainButton
                                 style={{borderRadius:30,  backgroundColor: Colors.primary }}
                                 onPress={() => {
-                                  navigation.navigate('Mainfrag')
+                                  navigation.navigate('Login')
                               }}
                             >
                                 <Text>Get Started
