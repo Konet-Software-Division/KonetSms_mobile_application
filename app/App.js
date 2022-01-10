@@ -1,14 +1,31 @@
 import React from 'react';
-import {ImageBackground,StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Navigator from './navigation/Navigator';
+import { Provider } from 'react-redux';
+import { store, persistor } from '../app/store/configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
+
+// const App  = () => (
+  
+//   <Navigator />
+//   // <ReportDetails />
+
+// );
+
+const App = () => {
 
 
-const App  = () => (
-  <Navigator />
-  // <ReportDetails />
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+      {/* <Login/> */}
+      <Navigator />
 
-);
-
+      </PersistGate>
+    </Provider>
+  );
+};
+export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -21,4 +38,3 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;

@@ -1,10 +1,13 @@
 import React, { useState, useEffect, Component } from 'react';
 import MainButton from '../UI/MainButton';
 import Colors from '../../constants/colors'
-import { Text, TouchableOpacity, View, StyleSheet, Image, Button, FlatList } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList } from 'react-native';
 import TextCapton from '../UI/TextCapton';
 import Card from '../UI/Card';
+import FlatListUI from '../UI/FlatListUI';
+import * as groupNetworks from '../../network/GroupNetworks';
 import GroupsModel from '../../model/GroupsModel';
+
 
 
 const renderGridItem = itemData => {
@@ -39,15 +42,29 @@ const renderGridItem = itemData => {
 const Home = ({ navigation })  => {
     
     const [Groups, setGroups] = useState([]);
+    const [IsLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {       
+const fetchGroups = async (values) => {
+    setIsLoading(true)
+    try {
+    data=await   groupNetworks.getGroups();
+        setIsLoading(false)
+        
         setGroups([
             new GroupsModel('1', 'Proly Customers', '200 Contacts'),
             new GroupsModel('2', 'Proly Customers', '200 Contacts'),
             new GroupsModel('3', 'Proly Customers', '200 Contacts'),
-            new GroupsModel('4', 'Proly Customers', '200 Contacts'),
-            
+            new GroupsModel('4', 'Proly Customers', '200 Contacts')            
         ])
+    } catch (err) {
+        CustomsnackBar(err.message)
+        setIsLoading(false)
+    }
+ }
+
+
+    useEffect(() => {   
+        fetchGroups()
        }, [])
     return(
 
@@ -91,13 +108,11 @@ const Home = ({ navigation })  => {
 
         </View>
   <View style={{flex:3}}>
-
-            <FlatList 
-                keyExtractor={(item, index) => item.id}
-                data={Groups}
-                renderItem={renderGridItem}
-                numColumns={1}
-            />
+  {IsLoading ? (
+          <ActivityIndicator size="large" style={{justifyContent: 'center',marginTop:70}} />
+        ) : (
+            <FlatListUI list_data={Groups} empty_message="No Group found" renderGridItem={renderGridItem}/>
+            )}
           </View>
         <View style={styles.bottomView}>
             <TouchableOpacity

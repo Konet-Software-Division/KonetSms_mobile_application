@@ -1,19 +1,38 @@
 import React from 'react'
-import { View, FlatList, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet,Text } from 'react-native'
 
 
 
 const FlatListUI = props => {
-    const keyExtractor = (item, index) => {
-        return Math.random().toString();
-    }
+    // const keyExtractor = (item, index) => {
+    //     return Math.random().toString();
+    // }
+    const EmptyListMessage = ({item}) => {
+        return (
+          // Flat List Item
+          <Text
+            style={styles.emptyListStyle}>
+            {props.empty_message}
+          </Text>
+        );
+      };
     return (
         <View style={styles.container}>
-            <FlatList
+            
+             <FlatList 
+                keyExtractor={(item, index) => item.id}
+                data={props.list_data}
+                renderItem={props.renderGridItem}
+                numColumns={1}
+                ListEmptyComponent={EmptyListMessage}
+            />
+            {/* <FlatList
                 data={props.userData}
                 keyExtractor={keyExtractor}
                 renderItem={props.renderMainItem}
-            />
+                // ListEmptyComponent={EmptyListMessage}
+
+            /> */}
         </View>
     );
 
@@ -22,7 +41,12 @@ const FlatListUI = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    }
+    },
+    emptyListStyle: {
+        padding: 10,
+        fontSize: 18,
+        textAlign: 'center',
+      },
 });
 
 export default FlatListUI

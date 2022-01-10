@@ -12,32 +12,35 @@ import TextCapton from '../UI/TextCapton';
 import CustomSpinner from '../UI/CustomSpinner';
 import * as loginNetworks from '../../network/LoginNetworks';
 import Snackbar from 'react-native-snackbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser, userSelector, clearState } from '../../store/LoginSlice';
 
- 
+
 const Login  = ({navigation})  => {
+    const dispatch = useDispatch();
+    const { isFetching, isSuccess, isError, errorMessage } = useSelector(state => state.loginSlice);
+    
+      useEffect(() => {
+        navigation.navigate('Onboarding')
 
-    const [IsLoading, setIsLoading]=useState(false);
+        if (isError) {
+          CustomsnackBar(errorMessage);
+          dispatch(clearState());
+        }
+    
+        if (isSuccess) {
+          dispatch(clearState());
+          navigation.navigate('Onboarding')
+
+        }
+      }, [isError, isSuccess]);
 
     CustomsnackBar=(message)  => {
         Snackbar.show({ text: message, textColor: 'red',
         backgroundColor: 'black' })
     }
     const handleSubmit = async (values) => {
-        setIsLoading(true)
-        try {
-           await   loginNetworks.login(
-                values.email,
-                values.password
-            );
-            setIsLoading(false)
-        navigation.navigate('MainFrag')
-
-        } catch (err) {
-            CustomsnackBar(err.message)
-            setIsLoading(false)
-
-        }
-    
+        dispatch(loginNetworks.loginUser(values));
      }
     
     return (
@@ -48,7 +51,8 @@ const Login  = ({navigation})  => {
        source={require('../../images/konetsms.png')}
      style={styles.image}/>
 
-        <TextCapton style={{fontSize: 28, fontWeight:'700'}} text="Welcome Back!"/>
+        <TextCapton style={{fontSize: 28, fontWeight:'700'}} text="Welcome Back!"/> 
+       
         <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.primaryforty}} text="Sign in to access account."/>
 
         <Formik
@@ -113,9 +117,8 @@ const Login  = ({navigation})  => {
 
         <View style={styles.passwordview}>
         <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.primary}} text="Forgot password?"/>
-        <CustomSpinner visible={IsLoading}/>
+        <CustomSpinner visible={isFetching}/>
         <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.lightblue}} text="Reset here"/>
-
         </View>
         </View>
         </ScrollView>
