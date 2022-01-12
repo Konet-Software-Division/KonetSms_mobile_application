@@ -2,15 +2,9 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import Navigator from './navigation/Navigator';
 import { Provider } from 'react-redux';
-import { store, persistor } from '../app/store/configureStore';
+import { store, persistor } from '../app/store/ConfigureStore';
 import { PersistGate } from 'redux-persist/integration/react';
 
-// const App  = () => (
-  
-//   <Navigator />
-//   // <ReportDetails />
-
-// );
 
 const App = () => {
 

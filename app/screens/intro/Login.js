@@ -13,7 +13,7 @@ import CustomSpinner from '../UI/CustomSpinner';
 import * as loginNetworks from '../../network/LoginNetworks';
 import Snackbar from 'react-native-snackbar';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginUser, userSelector, clearState } from '../../store/LoginSlice';
+import { clearState } from '../../store/LoginSlice';
 
 
 const Login  = ({navigation})  => {
@@ -21,7 +21,6 @@ const Login  = ({navigation})  => {
     const { isFetching, isSuccess, isError, errorMessage } = useSelector(state => state.loginSlice);
     
       useEffect(() => {
-        navigation.navigate('Onboarding')
 
         if (isError) {
           CustomsnackBar(errorMessage);
@@ -30,7 +29,7 @@ const Login  = ({navigation})  => {
     
         if (isSuccess) {
           dispatch(clearState());
-          navigation.navigate('Onboarding')
+          navigation.replace('Mainfrag')
 
         }
       }, [isError, isSuccess]);
@@ -57,21 +56,21 @@ const Login  = ({navigation})  => {
 
         <Formik
             initialValues={{
-                email: '',
-                password: ''
+                email: 'jibola@gmail.com',
+                password: '1234567890'
             }}
              onSubmit={values  => {handleSubmit(values)}}
             validationSchema={yup.object().shape({
-                email: yup
-                    .string()
-                    .min(4)
-                .required('Please, provide your email!'),
+                // email: yup
+                //     .string()
+                //     .min(4)
+                // .required('Please, provide your email!'),
 
-                password: yup
-                    .string()
-                .min(4)
-                .max(20, 'Password should not excced 10 chars.')
-                .required(),
+                // password: yup
+                //     .string()
+                // .min(4)
+                // .max(20, 'Password should not excced 10 chars.')
+                // .required(),
             })}
         >
             {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (

@@ -18,6 +18,7 @@ export const loginUser = createAsyncThunk(
             email,
             password,
           }),
+          
         }
       );
       let data = await response.json();
@@ -41,51 +42,16 @@ export const loginUser = createAsyncThunk(
 );
 
 
-const login = async (email, password) => {
-  try {
-     
-    const response = await fetch(Constant.baseUrl+'user_service/api/v1/auth/login',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        timeoutDuration: 10,
-        body: JSON.stringify({
-            "email" : email,
-            "password" : password,
-        })
-      }
-    );
 
-    if (!response.ok) {
-      const resData = await response.json();
-
-      throw new Error(resData.message);
-    }
-
-    const resData = await response.json();
-    console.log(JSON.stringify(resData));
-    return resData
-    // storeUserSession
- 
- } catch (error) {
- 
-   throw new Error(error);
- } 
-}
-
-
-
-async function storeUserSession(token) {
-  try {
-      await EncryptedStorage.setItem(
-          "user_token","Bearer "+token
+// async function storeUserSession(token) {
+//   try {
+//       await EncryptedStorage.setItem(
+//           "user_token","Bearer "+token
           
-      );
+//       );
 
-      // Congrats! You've just stored your first value!
-  } catch (error) {
-      // There was an error on the native side
-  }
-}
+//       // Congrats! You've just stored your first value!
+//   } catch (error) {
+//       // There was an error on the native side
+//   }
+// }

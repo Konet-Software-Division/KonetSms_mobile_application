@@ -23,17 +23,15 @@ const loginSlice  = createSlice({
   },
   extraReducers: {
     [loginNetworks.loginUser.fulfilled]: (state, { payload }) => {
-      console.log('payload', payload.fullName);
 
       state.email = payload.email;
-      state.username = payload.fullName;
+      state.fullName = payload.fullName;
       state.access_token = payload.access_token;
       state.isFetching = false;
       state.isSuccess = true;
       return state;
     },
     [loginNetworks.loginUser.rejected]: (state, { payload }) => {
-      console.log('payload', payload);
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;

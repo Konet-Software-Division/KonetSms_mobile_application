@@ -1,33 +1,55 @@
 import Constant from '../constants/constant'
-// import EncryptedStorage from 'react-native-encrypted-storage';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 
-export const getGroups = async () => {
-  try {
-     
-    const response = await fetch(Constant.baseUrl+'contact_service/api/v1/groups/fetch-all-groups',
+
+
+
+
+export const getGroups = createAsyncThunk(
+  'getgroups',
+  async ({access_token}, thunkAPI) => {
+    try {
+      const response = await fetch(Constant.baseUrl+'contact_service/api/v1/groups/fetch-all-groups',
       {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-          // 'TOKEN': await EncryptedStorage.getItem("user_token")
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer "+access_token
+          },
+         
+        }
+      );
 
-        },
-        timeoutDuration: 10,
+      let data = await response.json();
 
+      if (!response.ok) {
+        return thunkAPI.rejectWithValue(data);
       }
-    );
+      // localStorage.setItem('token', data.token);
+      // return { ...data, username: name, email: email };
 
-    if (!response.ok) {
-      const resData = await response.json();
-
-      throw new Error(resData.message);
+      return data ;
+      
+    } catch (e) {
+      console.log('Error', e.response.data);
+      return thunkAPI.rejectWithValue(e.response.data);
     }
+  }
+);
 
-    const resData = await response.json();
-    console.log(JSON.stringify(resData));
- 
- } catch (error) {
- 
-   throw new Error(error);
- } 
-}
+
+
+// async function storeUserSession(token) {
+//   try {
+//       await EncryptedStorage.setItem(
+//           "user_token","Bearer "+token
+          
+//       );
+
+//       // Congrats! You've just stored your first value!
+//   } catch (error) {
+//       // There was an error on the native side
+//   }
+// }

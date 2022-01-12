@@ -4,9 +4,9 @@ import { View, FlatList, StyleSheet,Text } from 'react-native'
 
 
 const FlatListUI = props => {
-    // const keyExtractor = (item, index) => {
-    //     return Math.random().toString();
-    // }
+    const keyExtractor = (item, index) => {
+        return Math.random().toString();
+    }
     const EmptyListMessage = ({item}) => {
         return (
           // Flat List Item
@@ -24,11 +24,12 @@ const FlatListUI = props => {
                 data={props.list_data}
                 renderItem={props.renderGridItem}
                 numColumns={1}
+                 keyExtractor={keyExtractor}
                 ListEmptyComponent={EmptyListMessage}
             />
             {/* <FlatList
                 data={props.userData}
-                keyExtractor={keyExtractor}
+               
                 renderItem={props.renderMainItem}
                 // ListEmptyComponent={EmptyListMessage}
 

@@ -7,6 +7,8 @@ import Card from '../UI/Card';
 import FlatListUI from '../UI/FlatListUI';
 import * as groupNetworks from '../../network/GroupNetworks';
 import GroupsModel from '../../model/GroupsModel';
+import { useSelector, useDispatch } from 'react-redux';
+import {CustomsnackBar} from '../../Util/utils';
 
 
 
@@ -21,8 +23,8 @@ const renderGridItem = itemData => {
                     <TextCapton style={{
                         // fontFamily: 'Campton-bold',
                         fontSize: 14, fontWeight: '700'
-                    }} text={itemData.item.customer} />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.contact} />
+                    }} text={itemData.item.name} />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.contact_count+" Contacts"} />
                 </View>
             </View>
             <View style={styles.groups_lasticon}>
@@ -41,31 +43,23 @@ const renderGridItem = itemData => {
 
 const Home = ({ navigation })  => {
     
-    const [Groups, setGroups] = useState([]);
-    const [IsLoading, setIsLoading] = useState(true);
 
-const fetchGroups = async (values) => {
-    setIsLoading(true)
-    try {
-    data=await   groupNetworks.getGroups();
-        setIsLoading(false)
-        
-        setGroups([
-            new GroupsModel('1', 'Proly Customers', '200 Contacts'),
-            new GroupsModel('2', 'Proly Customers', '200 Contacts'),
-            new GroupsModel('3', 'Proly Customers', '200 Contacts'),
-            new GroupsModel('4', 'Proly Customers', '200 Contacts')            
-        ])
-    } catch (err) {
-        CustomsnackBar(err.message)
-        setIsLoading(false)
-    }
- }
+    const dispatch = useDispatch();
+    const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state => state.getGroupSlice);
+    const  {access_token,fullName}  = useSelector(state => state.loginSlice);
+    useEffect(() => {
+        dispatch(groupNetworks.getGroups( { access_token: access_token } ));
+        if (isError) {
+          CustomsnackBar(errorMessage,'red');
+        }
+       
+      }, [isError]);
 
+   
+     
+    
 
-    useEffect(() => {   
-        fetchGroups()
-       }, [])
+ 
     return(
 
     <View style={styles.container}>
@@ -73,7 +67,7 @@ const fetchGroups = async (values) => {
             <View style={styles.container_header}>
                 <View style={{height:80}}>
                     <TextCapton style={{ fontSize: 28, fontWeight: '300' }} text="Welcome" />
-                    <TextCapton style={{ fontSize: 28, fontWeight: '700' }} text="Jibola orija" />
+                    <TextCapton style={{ fontSize: 28, fontWeight: '700' }} text={fullName} />
                 </View>
                 <Image
                     source={require('../../images/notification.png')}
@@ -108,15 +102,16 @@ const fetchGroups = async (values) => {
 
         </View>
   <View style={{flex:3}}>
-  {IsLoading ? (
+  {isFetching ? (
           <ActivityIndicator size="large" style={{justifyContent: 'center',marginTop:70}} />
         ) : (
-            <FlatListUI list_data={Groups} empty_message="No Group found" renderGridItem={renderGridItem}/>
+            <FlatListUI list_data={groups} empty_message="No Group found" renderGridItem={renderGridItem}/>
             )}
           </View>
         <View style={styles.bottomView}>
             <TouchableOpacity
                 activeOpacity={0.7}
+                // onPress={()=> dispatch(groupNetworks.getGroups({ access_token: access_token }  ))}
                 style={styles.touchableOpacityStyle}>
                 <Image
                     // FAB using TouchableOpacity with an image
