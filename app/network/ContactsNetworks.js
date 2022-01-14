@@ -5,11 +5,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 
 
-export const getGroups = createAsyncThunk(
-  'getgroups',
+export const getContacts = createAsyncThunk(
+  'getContacts',
   async ({access_token}, thunkAPI) => {
     try {
-      const response = await fetch(Constant.baseUrl+'contact_service/api/v1/groups/fetch-all-groups',
+      const response = await fetch(Constant.baseUrl+'contact_service/api/v1/contacts/fetch-contacts',
       {
           method: 'GET',
           headers: {
@@ -26,8 +26,6 @@ export const getGroups = createAsyncThunk(
       if (!response.ok) {
         return thunkAPI.rejectWithValue(data);
       }
-      // localStorage.setItem('token', data.token);
-      // return { ...data, username: name, email: email };
 
       return data ;
       

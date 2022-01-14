@@ -57,8 +57,6 @@ const Home = ({ navigation })  => {
 
    
      
-    
-
  
     return(
 

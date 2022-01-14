@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 
 import loginSlice from './LoginSlice';
 import getGroupSlice from './GetGroupSlice';
+import getContactsSlice from './GetContactsSlice';
 
 
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -19,6 +20,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   loginSlice: persistReducer(persistConfig, loginSlice),
   getGroupSlice: getGroupSlice,
+  getContactsSlice: getContactsSlice,
+
     // TempReducer:TempReducer
 });
 

@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Image,ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
 import TextCapton from '../UI/TextCapton';
 import SearchInput from '../UI/SearchInput';
 import ContactModel from '../../model/ContactModel';
 import GroupsModel from '../../model/GroupsModel';
 import Colors from '../../constants/colors'
 import ButtonImageText from '../UI/ButtonImageText';
+import FlatListUI from '../UI/FlatListUI';
+
+import * as groupNetworks from '../../network/GroupNetworks';
+import * as contactsNetworks from '../../network/ContactsNetworks';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const renderGroupGridItem = itemData => {
@@ -19,8 +25,8 @@ const renderGroupGridItem = itemData => {
                     <TextCapton style={{
                         // fontFamily: 'Campton-bold',
                         fontSize: 14, fontWeight: '700'
-                    }} text={itemData.item.customer} />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.contact} />
+                    }} text={itemData.item.name} />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.contact_count+" Contacts"} />
                 </View>
             </View>
             <View style={styles.groups_lasticon}>
@@ -48,7 +54,7 @@ const renderContactGridItem = itemData => {
                     <TextCapton style={{
                         // fontFamily: 'Campton-bold',
                         fontSize: 14, fontWeight: '700',
-                    }} text={itemData.item.name} />
+                    }} text={itemData.item.firstName +" "+itemData.item.lastName} />
                     <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.phone} />
                 </View>
             </View>
@@ -56,7 +62,8 @@ const renderContactGridItem = itemData => {
                 <Image
                     source={require('../../images/contacts/group.png')}
                     style={{ height: 24, width: 24 }} />
-                <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.group} />
+                <TextCapton style={{ fontSize: 14, fontWeight: '500' }} 
+                text={itemData.item.groups[0].name} />
 
             </View>
 
@@ -66,27 +73,26 @@ const renderContactGridItem = itemData => {
 
 
 const Contacts = ({ navigation }) => {
-    const [Contact, setContact] = useState([]);
-    const [Groups, setGroups] = useState([]);
     const [ContactState, setContactState] = useState(true);
- 
 
+
+    const dispatch = useDispatch();
+    const contactslice= useSelector(state => state.getContactsSlice);
+
+    const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state => state.getGroupSlice);
+    const  {access_token}  = useSelector(state => state.loginSlice);
     useEffect(() => {
-        setGroups([
-            new GroupsModel('1', 'Proly Customers', '200 Contacts'),
-            new GroupsModel('2', 'Proly Customers', '200 Contacts'),
-            new GroupsModel('3', 'Proly Customers', '200 Contacts'),
-            new GroupsModel('4', 'Proly Customers', '200 Contacts'),
+        dispatch(groupNetworks.getGroups( { access_token: access_token } ));
+        dispatch(contactsNetworks.getContacts( { access_token: access_token } ));
+        if (isError) {
+          CustomsnackBar(errorMessage,'red');
+        }
+        if (contactslice.isError) {
+            CustomsnackBar(errorMessage,'red');
+          }
+       
+      }, [isError,contactslice.isError]);
 
-        ])
-        setContact([
-            new ContactModel('1', '../../images/contacts/profile_image.png', 'Obi', '08099267871', "Groud A"),
-            new ContactModel('2', '../../images/contacts/profile_image2.png', 'Jude', '08001263316', "Groud B"),
-            new ContactModel('3', '../../images/contacts/profile_image.png', 'David', '08099269815', "Groud C"),
-            new ContactModel('4', '../../images/contacts/profile_image2.png', 'Frank', '08099167875', "Groud D"),
-
-        ])
-    }, [])
     return (
 
         <View style={styles.container}>
@@ -104,21 +110,26 @@ const Contacts = ({ navigation }) => {
             </View>
 
             <SearchInput />
-           { ContactState ? 
-            <FlatList
-                keyExtractor={(item, index) => item.id}
-                data={Contact}
-                renderItem={renderContactGridItem}
-                numColumns={1}
-            />
+           { !ContactState ? 
+            <View style={{flex:3}}>
+            {isFetching ? (
+                    <ActivityIndicator size="large" style={{justifyContent: 'center',marginTop:70}} />
+                  ) : (
+                      <FlatListUI list_data={groups} empty_message="No Group found" renderGridItem={renderGroupGridItem}/>
+                      )}
+                    </View>
            
+                   
             :
-               <FlatList
-                keyExtractor={(item, index) => item.id}
-                data={Groups}
-                renderItem={renderGroupGridItem}
-                numColumns={1}
-            />}
+            <View style={{flex:1,width:'100%'}}>
+            {contactslice.isFetching ? (
+                    <ActivityIndicator size="large" style={{justifyContent: 'center',marginTop:70}} />
+                  ) : (
+                      <FlatListUI list_data={contactslice.contacts} empty_message="No Contact found" renderGridItem={renderContactGridItem}/>
+                      )}
+                    </View>
+            
+            }
             <View style={{width:'100%', justifyContent: 'center',
         alignItems: 'center'}}>
             <View style={styles.container_bottom}>

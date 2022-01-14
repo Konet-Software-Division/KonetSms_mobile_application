@@ -42,6 +42,7 @@ const FlatListUI = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent:'space-between'
     },
     emptyListStyle: {
         padding: 10,
