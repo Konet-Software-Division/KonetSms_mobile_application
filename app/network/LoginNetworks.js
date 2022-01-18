@@ -18,6 +18,7 @@ export const loginUser = createAsyncThunk(
             email,
             password,
           }),
+          timeout:1000
           
         }
       );

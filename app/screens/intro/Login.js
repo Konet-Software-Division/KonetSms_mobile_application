@@ -2,7 +2,6 @@ import React, { useState,useEffect, Component } from 'react';
 
 import MainButton from '../UI/MainButton';
 import InputText from '../UI/InputText';
-
 import Colors from '../../constants/colors'
 import { Text, ToastAndroid, View, StyleSheet, Image} from 'react-native';
 import * as yup from 'yup'
@@ -14,14 +13,16 @@ import * as loginNetworks from '../../network/LoginNetworks';
 import Snackbar from 'react-native-snackbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearState } from '../../store/LoginSlice';
+import {InternetConnection} from '../../Util/utils';
+import {useNetInfo} from "@react-native-community/netinfo";
 
 
 const Login  = ({navigation})  => {
     const dispatch = useDispatch();
     const { isFetching, isSuccess, isError, errorMessage } = useSelector(state => state.loginSlice);
-    
+    const netInfo = useNetInfo();
       useEffect(() => {
-
+        dispatch(clearState());
         if (isError) {
           CustomsnackBar(errorMessage);
           dispatch(clearState());
@@ -32,6 +33,8 @@ const Login  = ({navigation})  => {
           navigation.replace('Mainfrag')
 
         }
+   
+        
       }, [isError, isSuccess]);
 
     CustomsnackBar=(message)  => {
@@ -39,7 +42,13 @@ const Login  = ({navigation})  => {
         backgroundColor: 'black' })
     }
     const handleSubmit = async (values) => {
-        dispatch(loginNetworks.loginUser(values));
+        if(netInfo.isInternetReachable){
+            dispatch(loginNetworks.loginUser(values));
+        }else{
+            alert('PLEASE CONNECT TO INTERNET');
+
+        }
+        
      }
     
     return (

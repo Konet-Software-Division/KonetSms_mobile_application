@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { View, StyleSheet,useWindowDimensions,FlatList,Image } from 'react-native';
+import { View, StyleSheet,useWindowDimensions,ActivityIndicator,Image } from 'react-native';
 import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
 import SmsModel from '../../model/SmsModel';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import * as transactionsNetworks from '../../network/TransactionsNetworks';
+import { useSelector, useDispatch } from 'react-redux';
+import FlatListUI from '../UI/FlatListUI';
+import {formatDate} from '../../Util/utils';
 
 
 const Report = () => {
+ const navigation = useNavigation(); 
+
+  const dispatch = useDispatch();
+  const { isFetching, isSuccess, isError, errorMessage,sms_transactions,transactions} = useSelector(state => state.transactionsSlice);
+  const  {access_token}  = useSelector(state => state.loginSlice);
+
+  useEffect(() => {
+      dispatch(transactionsNetworks.smsTransactions( { access_token: access_token } ));
+      dispatch(transactionsNetworks.paymentTransactions( { access_token: access_token } ));
+
+      if (isError) {
+        CustomsnackBar(errorMessage,'red');
+      }
+     
+    }, [isError]);
+    
 const renderTransactionGridItem = itemData => {
   
   return (
@@ -24,11 +44,11 @@ const renderTransactionGridItem = itemData => {
               <View style={{ marginStart: "15%" }}>
               <View style={{flexDirection: 'row'}} >
                   <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="ID: " />
-                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.idsms} />
+                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.transactionId} />
                   </View>
                   <View style={{flexDirection: 'row'}} >
                   <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Units: " />
-                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.cost} />
+                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.unit} />
                   </View>
               </View>
           </View>
@@ -37,11 +57,12 @@ const renderTransactionGridItem = itemData => {
               <View style={{ marginStart: "1%" }}>
               <View style={{flexDirection: 'row'}} >
               <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Date: " />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.date} />
+
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={formatDate(itemData.item.created_at)} />
                     </View>
                     <View style={{flexDirection: 'row'}} >
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Amount: " />
-                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.pageNo} />
+                  <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.amount} />
                   </View>
                
               </View>
@@ -62,7 +83,7 @@ const renderSmsGridItem = itemData => {
                 <View style={{ marginStart: "15%" }}>
                 <View style={{flexDirection: 'row'}} >
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="ID: " />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.idsms} />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.transaction_id} />
                     </View>
                     <View style={{flexDirection: 'row',marginTop:5}} >
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Units: " />
@@ -75,14 +96,15 @@ const renderSmsGridItem = itemData => {
                 <View style={{ marginStart: "1%" }}>
                 <View style={{flexDirection: 'row'}} >
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Date: " />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={itemData.item.date} />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '500' }} 
+              text={formatDate(itemData.item.created_at)} /> 
                     </View>
                     <View style={{flexDirection: 'row',marginTop:5}} >
                     <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="No. of Pages: " />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text={itemData.item.pageNo} />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text={itemData.item.number_of_pages} />
                    
                     <TextCapton style={{ marginLeft:8,fontSize: 14, fontWeight: '700' }} text="Vol. " />
-                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text={itemData.item.vol} />
+                    <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text={itemData.item.volume} />
                     </View>
                 </View>
             </View>
@@ -90,7 +112,6 @@ const renderSmsGridItem = itemData => {
         </View>
     );
 };
-
 const renderTabBar = props => (
   <TabBar 
       {...props}
@@ -103,40 +124,43 @@ const renderTabBar = props => (
 );
 
 
-  const navigation = useNavigation(); 
-  const [Sms, setSms] = useState([]);
+  // const [Sms, setSms] = useState([]);
   const [Transaction, setTransaction] = useState([]);
 
-  useEffect(() => {
-    setSms([
-        new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4','2'),
-        new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3','2'),
-        new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2','1'),
-        new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1','5'),
-    ])
-    setTransaction([
-      new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4'),
-      new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3'),
-      new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2'),
-      new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1'),
-  ])
-}, [])
+//   useEffect(() => {
+  
+//     setTransaction([
+//       new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4'),
+//       new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3'),
+//       new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2'),
+//       new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1'),
+//   ])
+// }, [])
   const SMS = () => (
-    <FlatList
-    keyExtractor={(item, index) => item.id}
-    data={Sms}
-    renderItem={renderSmsGridItem}
-    numColumns={1}
-  />
+
+  <View style={{flex:1}}>
+  {isFetching ? (
+          <ActivityIndicator size="large" style={{justifyContent: 'center',marginTop:70}} />
+        ) : (
+            <FlatListUI list_data={sms_transactions} empty_message="No SMS found" renderGridItem={renderSmsGridItem}/>
+            )}
+          </View>
   );
   
   const Transactions = () => (
-     <FlatList
-    keyExtractor={(item, index) => item.id}
-    data={Sms}
-    renderItem={renderTransactionGridItem}
-    numColumns={1}
-  />
+  //    <FlatList
+  //   keyExtractor={(item, index) => item.id}
+  //   data={sms_transactions}
+  //   renderItem={renderTransactionGridItem}
+  //   numColumns={1}
+  // />
+  <View style={{flex:1}}>
+  {isFetching ? (
+          <ActivityIndicator size="large" style={{justifyContent: 'center',marginTop:70}} />
+        ) : (
+            <FlatListUI list_data={transactions} empty_message="No SMS found" renderGridItem={renderTransactionGridItem}/>
+            )}
+          </View>
     
   );
   

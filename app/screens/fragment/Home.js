@@ -6,7 +6,6 @@ import TextCapton from '../UI/TextCapton';
 import Card from '../UI/Card';
 import FlatListUI from '../UI/FlatListUI';
 import * as groupNetworks from '../../network/GroupNetworks';
-import GroupsModel from '../../model/GroupsModel';
 import { useSelector, useDispatch } from 'react-redux';
 import {CustomsnackBar} from '../../Util/utils';
 

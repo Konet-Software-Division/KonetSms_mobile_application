@@ -1,9 +1,9 @@
-import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 import * as groupNetworks from '../network/GroupNetworks';
 
 
-const getGroupSlice  = createSlice({
-   name: 'get_group',
+const getFetchScheduledMessages  = createSlice({
+   name: 'fetch_scheduled_messages ',
   initialState: {
     groups: [],
     isFetching: false,
@@ -25,7 +25,7 @@ const getGroupSlice  = createSlice({
       // console.log('payload', payload);
       state.isFetching = false;
       state.isError = true;
-      // state.errorMessage = payload.message;
+      state.errorMessage = payload.message;
     },
     [groupNetworks.getGroups.pending]: (state) => {
       state.isFetching = true;
@@ -34,8 +34,5 @@ const getGroupSlice  = createSlice({
   });
   
 
-export default getGroupSlice.reducer;
+export default getFetchScheduledMessages.reducer;
 
-
-
-// export const userSelector = (state) => state.logi;
