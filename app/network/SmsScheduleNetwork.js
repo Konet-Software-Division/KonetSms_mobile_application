@@ -9,7 +9,7 @@ export const smsSchedule = createAsyncThunk(
   'smsSchedule',
   async ({access_token}, thunkAPI) => {
     try {
-      const response = await fetch(Constant.baseUrl+'sms_service/api/v1/sms/fetch-scheduled-messages',
+      const response = await fetchWithTimeout(Constant.baseUrl+'sms_service/api/v1/sms/fetch-scheduled-messages',
       {
           method: 'GET',
           headers: {

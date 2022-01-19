@@ -26,15 +26,11 @@ const Login  = ({navigation})  => {
         if (isError) {
           CustomsnackBar(errorMessage);
           dispatch(clearState());
-        }
-    
+        } 
         if (isSuccess) {
           dispatch(clearState());
           navigation.replace('Mainfrag')
-
         }
-   
-        
       }, [isError, isSuccess]);
 
     CustomsnackBar=(message)  => {
@@ -42,6 +38,7 @@ const Login  = ({navigation})  => {
         backgroundColor: 'black' })
     }
     const handleSubmit = async (values) => {
+        
         if(netInfo.isInternetReachable){
             dispatch(loginNetworks.loginUser(values));
         }else{

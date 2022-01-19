@@ -8,4 +8,5 @@ export default {
     FIRST_NAME:'first_name',
     LAST_NAME:'last_name',
     AVATAR:'avatar',
+    timeout:8000
 }

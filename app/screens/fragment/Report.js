@@ -3,7 +3,6 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { View, StyleSheet,useWindowDimensions,ActivityIndicator,Image } from 'react-native';
 import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
-import SmsModel from '../../model/SmsModel';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import * as transactionsNetworks from '../../network/TransactionsNetworks';
@@ -127,15 +126,7 @@ const renderTabBar = props => (
   // const [Sms, setSms] = useState([]);
   const [Transaction, setTransaction] = useState([]);
 
-//   useEffect(() => {
-  
-//     setTransaction([
-//       new SmsModel(1,'254599', 'Thu Jun 03 2021', '2 Units', '4'),
-//       new SmsModel(2,'498099','Thu Jun 03 2021', ' 6 Units', '3'),
-//       new SmsModel(3,'428599' ,'Thu Jun 03 2021', ' 3 Units', '2'),
-//       new SmsModel(4,'901599', 'Thu Jun 03 2021', ' 5 Units', '1'),
-//   ])
-// }, [])
+
   const SMS = () => (
 
   <View style={{flex:1}}>
@@ -148,12 +139,7 @@ const renderTabBar = props => (
   );
   
   const Transactions = () => (
-  //    <FlatList
-  //   keyExtractor={(item, index) => item.id}
-  //   data={sms_transactions}
-  //   renderItem={renderTransactionGridItem}
-  //   numColumns={1}
-  // />
+  
   <View style={{flex:1}}>
   {isFetching ? (
           <ActivityIndicator size="large" style={{justifyContent: 'center',marginTop:70}} />

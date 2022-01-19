@@ -1,13 +1,13 @@
 import Constant from '../constants/constant'
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-
+import {fetchWithTimeout} from '../Util/utils'
 
 export const loginUser = createAsyncThunk(
   'login',
   async ({email, password }, thunkAPI) => {
     try {
-      const response = await fetch(Constant.baseUrl+'user_service/api/v1/auth/login',
+      const response = await fetchWithTimeout(Constant.baseUrl+'user_service/api/v1/auth/login',
+      
         {
           method: 'POST',
           headers: {
@@ -18,7 +18,6 @@ export const loginUser = createAsyncThunk(
             email,
             password,
           }),
-          timeout:1000
           
         }
       );
@@ -36,6 +35,7 @@ export const loginUser = createAsyncThunk(
       return data ;
       
     } catch (e) {
+    
       console.log('Error', e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
     }

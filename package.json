@@ -45,6 +45,7 @@
     "react-navigation-stack": "^2.10.4",
     "react-redux": "^7.2.6",
     "redux-persist": "^6.0.0",
+    "whatwg-fetch-timeout": "^2.0.2-timeout",
     "yup": "^0.29.1"
   },
   "devDependencies": {

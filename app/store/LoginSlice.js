@@ -26,7 +26,7 @@ const loginSlice  = createSlice({
 
       state.email = payload.email;
       state.fullName = payload.fullName;
-      state.access_token = payload.access_token;
+      state.access_token = "Bearer "+payload.access_token;
       state.isFetching = false;
       state.isSuccess = true;
       return state;
