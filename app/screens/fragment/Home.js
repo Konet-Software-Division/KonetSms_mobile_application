@@ -45,9 +45,9 @@ const Home = ({ navigation })  => {
 
     const dispatch = useDispatch();
     const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state => state.getGroupSlice);
-    const  {access_token,fullName}  = useSelector(state => state.loginSlice);
+    const  {fullName}  = useSelector(state => state.loginSlice);
     useEffect(() => {
-        dispatch(groupNetworks.getGroups( { access_token: access_token } ));
+        dispatch(groupNetworks.getGroups() );
         if (isError) {
           CustomsnackBar(errorMessage,'red');
         }

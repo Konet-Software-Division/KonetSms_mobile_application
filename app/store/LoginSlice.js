@@ -1,5 +1,6 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import * as loginNetworks from '../network/LoginNetworks';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 
 const loginSlice  = createSlice({
@@ -23,15 +24,15 @@ const loginSlice  = createSlice({
   },
   extraReducers: {
     [loginNetworks.loginUser.fulfilled]: (state, { payload }) => {
-
+      storeUserSession("Bearer "+payload.access_token)
       state.email = payload.email;
       state.fullName = payload.fullName;
-      state.access_token = "Bearer "+payload.access_token;
       state.isFetching = false;
       state.isSuccess = true;
       return state;
     },
     [loginNetworks.loginUser.rejected]: (state, { payload }) => {
+      console.log(payload.message)
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
@@ -42,6 +43,15 @@ const loginSlice  = createSlice({
   },
   });
   
+  async function storeUserSession(token) {
+    try {
+        await EncryptedStorage.setItem(
+            "user_token",token            
+        );
+      } catch (error) {
+        // There was an error on the native side
+    }
+  }
 
 export default loginSlice.reducer;
 

@@ -1,4 +1,6 @@
 import React, { useState,useEffect, Component } from 'react';
+import Constant from '../../constants/constant'
+import axios from 'axios';
 
 import MainButton from '../UI/MainButton';
 import InputText from '../UI/InputText';
@@ -15,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearState } from '../../store/LoginSlice';
 import {InternetConnection} from '../../Util/utils';
 import {useNetInfo} from "@react-native-community/netinfo";
+
 
 
 const Login  = ({navigation})  => {
@@ -45,8 +48,25 @@ const Login  = ({navigation})  => {
             alert('PLEASE CONNECT TO INTERNET');
 
         }
+}
+
+    //     const handleSubmit = async (values) => {
+    //         try {
+    //             const resp = await Axiosclient.post('user_service/api/v1/auth/login',{
+    //                 email: values.email,
+    //                 password: values.password
+                    
+    //               });
+    //             console.log(resp.data);
+                
+    //         } catch (err) {
+    //             // Handle Error Here
+    //             console.error(err);
+    //         }
         
-     }
+        
+        
+    //  }
     
     return (
 <ScrollView style={{ backgroundColor: '#fff'}}>

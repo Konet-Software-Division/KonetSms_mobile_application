@@ -1,62 +1,29 @@
 import Constant from '../constants/constant'
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Axiosclient from '../HttpClient'
 
 
 export const smsTransactions = createAsyncThunk(
   'transactions',
-  async ({access_token}, thunkAPI) => {
+  async ( {thunkAPI}) => {
     try {
-      const response = await fetchWithTimeout(Constant.baseUrl+'sms_service/api/v1/sms/get-sms-transactions',
-      {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': access_token
-          },
-         
-        }
-      );
-
-      let data = await response.json();
-
-      if (!response.ok) {
-        return thunkAPI.rejectWithValue(data);
-      }
-      // localStorage.setItem('token', data.token);
-      // return { ...data, username: name, email: email };
-      return data ;
+      const response = await Axiosclient.get('sms_service/api/v1/sms/get-sms-transactions');
+  
+      return response.data ;
     } catch (e) {
-      console.log('Error', e.response.data);
-      return thunkAPI.rejectWithValue(e.response.data);
+      console.log('Error', e);
+      return thunkAPI.rejectWithValue(e);
     }
   }
 );
 
 export const paymentTransactions = createAsyncThunk(
   'paymentTransactions',
-  async ({access_token}, thunkAPI) => {
+  async ({thunkAPI}) => {
     try {
-      const response = await fetch(Constant.baseUrl+'sms_service/api/v1/payment/transactions',
-      {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer "+access_token
-          },         
-        }
-      );
+      const response = await Axiosclient.get('sms_service/api/v1/payment/transactions');
 
-      let data = await response.json();
-
-      if (!response.ok) {
-        return thunkAPI.rejectWithValue(data);
-      }
-      console.log('payload_transaction', data.transactions.transactionId);
-      // localStorage.setItem('token', data.token);
-      // return { ...data, username: name, email: email };
-      return data ;
+      return response.data ;
     } catch (e) {
       console.log('Error', e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
