@@ -12,6 +12,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Home from './Home'
 import Contacts from './Contacts'
 import Report from './Report'
+import Settings from './Settings'
 import ReportDetails from '../otherscreen/ReportDetails'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -32,7 +33,7 @@ const Tab = createBottomTabNavigator();
 const MainFrag= () => {
   return (
 
-<NavigationContainer>
+<NavigationContainer  style={styles.container}>
         <Tab.Navigator
         screenOptions={{ headerShown: false, tabBarShowLabel:false }}      
         >
@@ -92,7 +93,7 @@ const MainFrag= () => {
           }}/>
           <Tab.Screen
           name="Settings"
-          component={Home}
+          component={Settings}
           options={{
             title: '', //Set Header Title
             tabBarIcon: ({ focused }) => (
@@ -118,7 +119,11 @@ const MainFrag= () => {
 export default MainFrag;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
 
+    backgroundColor:'white'
+  },
     image: {
       width: 30,
       height: 30,

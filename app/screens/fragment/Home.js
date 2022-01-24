@@ -131,9 +131,10 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: '7%',
         paddingRight: '7%',
-        marginTop: '20%',
         flexDirection: 'column',
-        paddingTop:20
+        paddingTop:'20%',
+        backgroundColor:'white'
+
     },
     container_two: {
 
