@@ -5,11 +5,11 @@ import Axiosclient from '../HttpClient'
 
 export const loginUser = createAsyncThunk(
   'login',
-  async ({email, password }, thunkAPI) => {
+  async (values, thunkAPI) => {
     try {
        const response = await Axiosclient.post('user_service/api/v1/auth/login',{
-                    email: email,
-                    password: password
+                    "email": values.email,
+                    "password": values.password
                     
                   });
    
