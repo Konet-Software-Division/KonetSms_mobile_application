@@ -1,5 +1,5 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
-import * as loginNetworks from '../network/LoginNetworks';
+import * as loginNetworks from '../network/AuthenticationNetworks';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 

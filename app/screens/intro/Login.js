@@ -11,7 +11,7 @@ import { Formik } from 'formik'
 import { ScrollView } from 'react-native-gesture-handler';
 import TextCapton from '../UI/TextCapton';
 import CustomSpinner from '../UI/CustomSpinner';
-import * as loginNetworks from '../../network/LoginNetworks';
+import * as loginNetworks from '../../network/AuthenticationNetworks';
 import Snackbar from 'react-native-snackbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearState } from '../../store/LoginSlice';
