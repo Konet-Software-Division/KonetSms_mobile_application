@@ -6,6 +6,7 @@ import TextCapton from './TextCapton';
 import MainButton from '../UI/MainButton';
 import Colors from '../../constants/colors'
 import { useNavigation } from '@react-navigation/native';
+import { baseProps } from 'react-native-gesture-handler/lib/typescript/handlers/gestureHandlers';
 
 
 
@@ -15,12 +16,13 @@ return (
 <TouchableWithoutFeedback onPress={prop.setVisible}> 
 
 <View style={styles.container}>
-  <TextCapton style={{ fontSize: 13, fontWeight: '600' ,alignSelf:'center'}} text='Are you sure you want to delete  
-message history?' />
+  <TextCapton style={{ fontSize: 13, fontWeight: '600' ,alignSelf:'center'}} text={prop.title} />
 <View style={{flexDirection:'row',justifyContent:'space-between' }}>
 <MainButton
                             style={styles.butt}
                             onPress={() => {
+                                prop.setVisible();
+                                prop.approve();
                                 // navData.navigation.navigate('Login');
                             }}
                         >

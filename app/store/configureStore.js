@@ -4,7 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 
 import loginSlice from './LoginSlice';
 import getGroupSlice from './GroupSlice';
-import getContactsSlice from './GetContactsSlice';
+import getContactsSlice from './ContactsSlice';
 import smsScheduleSlice from './SmsScheduleSlice';
 import transactionsSlice from './TransactionsSlice';
 import EncryptedStorage from 'react-native-encrypted-storage';

@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const ReportDetails =({ route }) => {
     const [isModalVisible, setIsModalVisible] = useState(false)
-
+  
   
   
     const handleSignUp = () => {
@@ -76,7 +76,8 @@ const ReportDetails =({ route }) => {
     </View>
     </View>
     
-    <PopUpModal visible={isModalVisible} setVisible={handleSignUp}/>
+    <PopUpModal visible={isModalVisible} setVisible={handleSignUp} title="Are you sure you want to delete  
+message history?"/>
    </View>
   );
 }

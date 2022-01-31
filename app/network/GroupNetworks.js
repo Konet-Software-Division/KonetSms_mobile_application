@@ -37,9 +37,9 @@ export const getGroups = createAsyncThunk(
 
 export const deleteGroup = createAsyncThunk(
   'deleteGroup',
-  async ( {GROUP_ID},thunkAPI) => {
+  async ( GROUP_ID,thunkAPI) => {
     try {
- 
+      console.log(GROUP_ID)
       const response = await Axiosclient.delete('contact_service/api/v1/groups/'+GROUP_ID+'/delete-group');
 
       return response.data ;

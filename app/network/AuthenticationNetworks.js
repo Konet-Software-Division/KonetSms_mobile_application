@@ -9,8 +9,56 @@ export const loginUser = createAsyncThunk(
     try {
        const response = await Axiosclient.post('user_service/api/v1/auth/login',{
                     "email": values.email,
-                    "password": values.password
-                    
+                    "password": values.password                   
+                  });
+   
+      // if (!response.data.status=="error") {
+      //   return thunkAPI.rejectWithValue(data);
+      // }
+
+      
+      // localStorage.setItem('token', data.token);
+      // return { ...data, username: name, email: email };
+
+      return response.data;
+      
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+export const forgotPin = createAsyncThunk(
+  'forgot_pin',
+  async (email, thunkAPI) => {
+    try {
+       const response = await Axiosclient.post('user_service/api/v1/auth/forgot-pin',{
+                    "email": email,
+                  });
+   
+      // if (!response.data.status=="error") {
+      //   return thunkAPI.rejectWithValue(data);
+      // }
+
+      
+      // localStorage.setItem('token', data.token);
+      // return { ...data, username: name, email: email };
+
+      return response.data;
+      
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+export const checkToken = createAsyncThunk(
+  'check_token',
+  async (values, thunkAPI) => {
+    try {
+       const response = await Axiosclient.post('user_service/api/v1/auth/check-token',{
+                    "email": values.email,
+                    "token" : values.token
                   });
    
       // if (!response.data.status=="error") {

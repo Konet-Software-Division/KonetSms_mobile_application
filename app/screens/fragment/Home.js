@@ -8,10 +8,43 @@ import FlatListUI from '../UI/FlatListUI';
 import * as groupNetworks from '../../network/GroupNetworks';
 import { useSelector, useDispatch } from 'react-redux';
 import {CustomsnackBar} from '../../Util/utils';
+import PopUpModal from '../UI/PopUpModal';
+import { updateDeletedGroup } from '../../store/GroupSlice';
+import { clearState } from '../../store/GroupSlice';
 
 
+
+const Home = ({ navigation })  => {
+
+const [isModalVisible, setIsModalVisible] = useState(false)
+const dispatch = useDispatch();
+const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state => state.getGroupSlice);
+const  {fullName}  = useSelector(state => state.loginSlice);
+const [groupName, setGroupName] = useState("")
+const [id, setId] = useState("")
+
+useEffect(() => {
+        dispatch(groupNetworks.getGroups() );
+        if (isError) {
+          CustomsnackBar(errorMessage,'red');
+        }    
+        dispatch(clearState());   
+      }, [isError])
+
+const deleteGroupFromList=() => {
+      dispatch(groupNetworks.deleteGroup(id) );
+        if (isError) {
+          CustomsnackBar("errorMessage",'red');
+        }  
+        if(isSuccess){
+         dispatch(updateDeletedGroup(id));
+        } 
+       
+        
+}
 
 const renderGridItem = itemData => {
+
     return (
         <View style={styles.groups}>
             <View style={styles.groups_first}>
@@ -19,7 +52,7 @@ const renderGridItem = itemData => {
                     source={require('../../images/homefrag/group.png')}
                     style={{ height: 50, width: 50 }} />
                 <View style={{ marginStart: "5%" }}>
-                    <TextCapton style={{
+                    < TextCapton style={{
                         // fontFamily: 'Campton-bold',
                         fontSize: 14, fontWeight: '700'
                     }} text={itemData.item.name} />
@@ -30,34 +63,19 @@ const renderGridItem = itemData => {
                 <Image
                     source={require('../../images/homefrag/message_dark.png')}
                     style={{ height: 24, width: 24 }} />
+                <TouchableOpacity onPress={()=>{setIsModalVisible(!isModalVisible); setGroupName(itemData.item.name); setId(itemData.item._id)}}>
                 <Image
                     source={require('../../images/homefrag/trash.png')}
                     style={{ height: 24, width: 24 }} />
+                    </TouchableOpacity>
             </View>
 
         </View>
     );
-};
-
-
-const Home = ({ navigation })  => {
-    
-
-    const dispatch = useDispatch();
-    const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state => state.getGroupSlice);
-    const  {fullName}  = useSelector(state => state.loginSlice);
-    useEffect(() => {
-        dispatch(groupNetworks.getGroups() );
-        if (isError) {
-          CustomsnackBar(errorMessage,'red');
-        }
-       
-      }, [isError]);
-
-   
+};   
      
  
-    return(
+return(
 
     <View style={styles.container}>
         <View style={styles.container_two}>
@@ -95,6 +113,9 @@ const Home = ({ navigation })  => {
 
             </View>
           
+            <PopUpModal visible={isModalVisible} setVisible={()=>setIsModalVisible(!isModalVisible)} 
+            approve= {deleteGroupFromList} title= {"Are you sure you want to delete "+groupName+" group?"}  
+/>
 
 
         </View>
