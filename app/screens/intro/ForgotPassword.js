@@ -8,10 +8,9 @@ import Colors from '../../constants/colors'
 import { Text, ToastAndroid, View, StyleSheet, Image} from 'react-native';
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import TextCapton from '../UI/TextCapton';
-import CustomSpinner from '../UI/CustomSpinner';
-import * as loginNetworks from '../../network/AuthenticationNetworks';
+import * as authenticationNetworks from '../../network/AuthenticationNetworks';
 import Snackbar from 'react-native-snackbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearState } from '../../store/AuthenticationSlice';
@@ -19,55 +18,38 @@ import {useNetInfo} from "@react-native-community/netinfo";
 
 
 
-const Login  = ({navigation})  => {
+const ForgotPassword  = ({navigation})  => {
     const dispatch = useDispatch();
-    const { isFetching, isSuccess, isError, errorMessage } = useSelector(state => state.authenticationSlice);
+    const { isFetching, isSuccess, isError, Message } = useSelector(state => state.authenticationSlice);
+
     const netInfo = useNetInfo();
       useEffect(() => {
         dispatch(clearState());
         if (isError) {
-          CustomsnackBar(errorMessage);
+          CustomsnackBar(Message);
           dispatch(clearState());
         } 
         if (isSuccess) {
           dispatch(clearState());
-          navigation.replace('Mainfrag')
+          CustomsnackBar(Message);
+
+        //   navigation.replace('Login')
         }
       }, [isError, isSuccess]);
 
-    CustomsnackBar=(message)  => {
-        Snackbar.show({ text: message, textColor: 'red',
-        backgroundColor: 'black' })
-    }
+ 
     const handleSubmit = async (values) => {
         
         if(netInfo.isInternetReachable){
-            dispatch(loginNetworks.loginUser(values));
+            dispatch(authenticationNetworks.forgotPassword(values.email));
         }else{
             alert('PLEASE CONNECT TO INTERNET');
 
         }
 }
 
-    //     const handleSubmit = async (values) => {
-    //         try {
-    //             const resp = await Axiosclient.post('user_service/api/v1/auth/login',{
-    //                 email: values.email,
-    //                 password: values.password
-                    
-    //               });
-    //             console.log(resp.data);
-                
-    //         } catch (err) {
-    //             // Handle Error Here
-    //             console.error(err);
-    //         }
-        
-        
-        
-    //  }
     
-    return (
+return (
 <ScrollView style={{ backgroundColor: '#fff'}}>
 <View style={styles.container}>
     
@@ -75,34 +57,29 @@ const Login  = ({navigation})  => {
        source={require('../../images/konetsms.png')}
      style={styles.image}/>
 
-        <TextCapton style={{fontSize: 28, fontWeight:'700'}} text="Welcome Back!"/> 
+        <TextCapton style={{fontSize: 28, fontWeight:'700'}} text="Forget Password!"/> 
        
-        <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.primaryforty}} text="Sign in to access account."/>
+        <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.primaryforty}} text="`enter your email`."/>
 
         <Formik
             initialValues={{
-                email: 'jibola@gmail.com',
-                password: '1234567890'
+                email: 'jibola@gmail.com'
             }}
              onSubmit={values  => {handleSubmit(values)}}
             validationSchema={yup.object().shape({
                 // email: yup
                 //     .string()
                 //     .min(4)
-                // .required('Please, provide your email!'),
+                // .required('Please, provide your email!')
 
-                // password: yup
-                //     .string()
-                // .min(4)
-                // .max(20, 'Password should not excced 10 chars.')
-                // .required(),
+             
             })}
         >
             {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
                 <View style={styles.container_form} >
                         <InputText
                             value={values.email}
-                            defaultValue='jibola@gmail.com' 
+                            defaultValue='' 
                             errors={errors.email}
                             touched={touched.email}
                             onChangeText={handleChange('email')}
@@ -110,17 +87,6 @@ const Login  = ({navigation})  => {
                             placeholder="email"
                         />
                     
-
-                        <InputText
-                          value={values.password}
-                          defaultValue='1234567890' 
-                          errors={errors.password}
-                          touched={touched.password}
-                            onChangeText={handleChange('password')}
-                            placeholder="Password"
-                            onBlur={() => setFieldTouched('password')}
-                            secureTextEntry={true}
-                        />
                     
                         <MainButton
                             style={{
@@ -131,28 +97,19 @@ const Login  = ({navigation})  => {
                              // navigation.navigate('MainfragScreen')
                              // navData.navigation.navigate('Login');
                         >
-                            <Text>Login</Text>
+                            <Text>Send</Text>
                         </MainButton>
 
                 </View>
             )}
         </Formik>
-
-
-        <View style={styles.passwordview}>
-            <TouchableOpacity onPress={()=> navigation.replace('ForgotPassword')}>
-        <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.primary}} text="Forgot password?"/>
-        </TouchableOpacity>
-        <CustomSpinner visible={isFetching}/>
-        <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.lightblue}} text="Reset here"/>
-        </View>
         </View>
         </ScrollView>
     );
 };
 
 
-export default Login
+export default ForgotPassword
 
 const styles = StyleSheet.create({
     container: {

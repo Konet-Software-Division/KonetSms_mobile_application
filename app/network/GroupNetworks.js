@@ -52,7 +52,7 @@ export const deleteGroup = createAsyncThunk(
 
 export const updateGroup = createAsyncThunk(
   'updateGroup',
-  async ( {GROUP_ID}, thunkAPI) => {
+  async ( GROUP_ID, thunkAPI) => {
     try {
  
       const response = await Axiosclient.post('contact_service/api/v1/groups/'+GROUP_ID+'/update-group',{
@@ -69,7 +69,7 @@ export const updateGroup = createAsyncThunk(
 
 export const getGroupContacts = createAsyncThunk(
   'getGroupContacts',
-  async ( {GROUP_ID},thunkAPI) => {
+  async ( GROUP_ID,thunkAPI) => {
     try {
  
       const response = await Axiosclient.get('contact_service/api/v1/groups/'+GROUP_ID+'/fetch-group-contacts');

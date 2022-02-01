@@ -28,10 +28,11 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const forgotPin = createAsyncThunk(
-  'forgot_pin',
+export const forgotPassword = createAsyncThunk(
+  'forgot_password ',
   async (email, thunkAPI) => {
     try {
+      console.log(email)
        const response = await Axiosclient.post('user_service/api/v1/auth/forgot-pin',{
                     "email": email,
                   });

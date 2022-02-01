@@ -5,7 +5,7 @@ import Axiosclient from '../HttpClient'
 
 export const smsTransactions = createAsyncThunk(
   'transactions',
-  async ( {thunkAPI}) => {
+  async ( thunkAPI) => {
     try {
       const response = await Axiosclient.get('sms_service/api/v1/sms/get-sms-transactions');
   
@@ -19,7 +19,7 @@ export const smsTransactions = createAsyncThunk(
 
 export const paymentTransactions = createAsyncThunk(
   'paymentTransactions',
-  async ({thunkAPI}) => {
+  async (thunkAPI) => {
     try {
       const response = await Axiosclient.get('sms_service/api/v1/payment/transactions');
 

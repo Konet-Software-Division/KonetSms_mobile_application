@@ -16,11 +16,10 @@ const Report = () => {
 
   const dispatch = useDispatch();
   const { isFetching, isSuccess, isError, errorMessage,sms_transactions,transactions} = useSelector(state => state.transactionsSlice);
-  const  {access_token}  = useSelector(state => state.loginSlice);
 
   useEffect(() => {
-      dispatch(transactionsNetworks.smsTransactions( { access_token: access_token } ));
-      dispatch(transactionsNetworks.paymentTransactions( { access_token: access_token } ));
+      dispatch(transactionsNetworks.smsTransactions());
+      dispatch(transactionsNetworks.paymentTransactions());
 
       if (isError) {
         CustomsnackBar(errorMessage,'red');

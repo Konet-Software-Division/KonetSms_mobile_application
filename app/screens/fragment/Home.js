@@ -19,7 +19,7 @@ const Home = ({ navigation })  => {
 const [isModalVisible, setIsModalVisible] = useState(false)
 const dispatch = useDispatch();
 const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state => state.getGroupSlice);
-const  {fullName}  = useSelector(state => state.loginSlice);
+const  {fullName}  = useSelector(state => state.authenticationSlice);
 const [groupName, setGroupName] = useState("")
 const [id, setId] = useState("")
 

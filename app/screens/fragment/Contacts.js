@@ -80,10 +80,9 @@ const Contacts = ({ navigation }) => {
     const contactslice= useSelector(state => state.getContactsSlice);
 
     const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state => state.getGroupSlice);
-    const  {access_token}  = useSelector(state => state.loginSlice);
     useEffect(() => {
-        dispatch(groupNetworks.getGroups( { access_token: access_token } ));
-        dispatch(contactsNetworks.getContacts( { access_token: access_token } ));
+        dispatch(groupNetworks.getGroups());
+        dispatch(contactsNetworks.getContacts());
         if (isError) {
           CustomsnackBar(errorMessage,'red');
         }

@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { View, StyleSheet,useWindowDimensions,ActivityIndicator,Image } from 'react-native';
-import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-import * as transactionsNetworks from '../../network/TransactionsNetworks';
-import { useSelector, useDispatch } from 'react-redux';
-import FlatListUI from '../UI/FlatListUI';
-import {formatDate} from '../../Util/utils';
 
+const Settings = ({navigation}) => {
 
-const Settings = () => {
+  const handleSubmit = async (values) => {
+    navigation.replace('Mainfrag')
 
+  }
 
   return (
     <View style={styles.container}>

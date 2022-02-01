@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 
-import loginSlice from './LoginSlice';
+import authenticationSlice from './AuthenticationSlice';
 import getGroupSlice from './GroupSlice';
 import getContactsSlice from './ContactsSlice';
 import smsScheduleSlice from './SmsScheduleSlice';
@@ -18,7 +18,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  loginSlice: persistReducer(persistConfig, loginSlice),
+  authenticationSlice: persistReducer(persistConfig, authenticationSlice),
   getGroupSlice: getGroupSlice,
   getContactsSlice: getContactsSlice,
   smsScheduleSlice: smsScheduleSlice,
