@@ -17,7 +17,7 @@ const persistConfig = {
 
 };
 
-const rootReducer = combineReducers({
+const combinedReducer = combineReducers({
   authenticationSlice: persistReducer(persistConfig, authenticationSlice),
   getGroupSlice: getGroupSlice,
   getContactsSlice: getContactsSlice,
@@ -26,5 +26,12 @@ const rootReducer = combineReducers({
     // TempReducer:TempReducer
 });
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+// const rootReducer = (state, action) => {
+//   if (action.type === 'counter/logout') {
+//     state = undefined;
+//   }
+//   return combinedReducer(state, action);
+// };
+
+export const store = createStore(combinedReducer, applyMiddleware(thunk));
 export const persistor = persistStore(store);

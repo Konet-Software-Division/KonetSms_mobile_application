@@ -1,43 +1,39 @@
-import React, { useState,useEffect, Component } from 'react';
-import Constant from '../../constants/constant'
-import axios from 'axios';
-
+import React, { useEffect } from 'react';
 import MainButton from '../UI/MainButton';
 import InputText from '../UI/InputText';
 import Colors from '../../constants/colors'
-import { Text, ToastAndroid, View, StyleSheet, Image} from 'react-native';
+import { Text, View, StyleSheet, Image} from 'react-native';
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView,TouchableOpacity } from 'react-native-gesture-handler';
 import TextCapton from '../UI/TextCapton';
 import * as authenticationNetworks from '../../network/AuthenticationNetworks';
-import Snackbar from 'react-native-snackbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearState } from '../../store/AuthenticationSlice';
 import {useNetInfo} from "@react-native-community/netinfo";
 import {CustomsnackBar} from '../../Util/utils';
+import { useNavigation } from '@react-navigation/native';
 
 
-const ForgotPassword  = ({navigation})  => {
+
+const ChangePassword  = ({navigation})  => {
     const dispatch = useDispatch();
-    const { isFetching, isSuccess, isError, Message } = useSelector(state => state.authenticationSlice);
+    // const { isFetching, isSuccess, isError, Message } = useSelector(state => state.authenticationSlice);
+    // const navigation = useNavigation();
 
-    const netInfo = useNetInfo();
-      useEffect(() => {
-        dispatch(clearState());
-        if (isError) {
-          CustomsnackBar(Message,'Green');
+    // const netInfo = useNetInfo();
+    //   useEffect(() => {
+    //     dispatch(clearState());
+    //     if (isError) {
+    //       CustomsnackBar(Message,'Green');
 
-          dispatch(clearState());
-        } 
-        if (isSuccess) {
-          dispatch(clearState());
-          CustomsnackBar(errorMessage,'red');
-
-
-        //   navigation.replace('Login')
-        }
-      }, [isError, isSuccess]);
+    //       dispatch(clearState());
+    //     } 
+    //     if (isSuccess) {
+    //       dispatch(clearState());
+    //       CustomsnackBar(errorMessage,'red');
+    //     }
+    //   }, [isError, isSuccess]);
 
  
     const handleSubmit = async (values) => {
@@ -54,15 +50,15 @@ const ForgotPassword  = ({navigation})  => {
 return (
 <ScrollView style={{ backgroundColor: '#fff'}}>
 <View style={styles.container}>
-    
-<Image
-       source={require('../../images/konetsms.png')}
-     style={styles.image}/>
-
-        <TextCapton style={{fontSize: 28, fontWeight:'700'}} text="Forget Password!"/> 
+    <TouchableOpacity  onPressIn={() => navigation.goBack()}> 
+    <Image source={require('../../images/report/back.png')}
+                    style={{ height: 15, width: 7}} />
+                    </TouchableOpacity>
+    <TextCapton style={{ fontSize: 24, fontWeight: '700', marginLeft:30}} text="Change Password" />
+        
+    </View>   
+<View style={styles.sub_container}>
        
-        <TextCapton style={{fontSize: 14, fontWeight:'500',color:Colors.primaryforty}} text="`enter your email`."/>
-
         <Formik
             initialValues={{
                 email: 'jibola@gmail.com'
@@ -79,14 +75,34 @@ return (
         >
             {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
                 <View style={styles.container_form} >
-                        <InputText
+                    <InputText
                             value={values.email}
                             defaultValue='' 
                             errors={errors.email}
                             touched={touched.email}
                             onChangeText={handleChange('email')}
                             onBlur={() => setFieldTouched('email')}
-                            placeholder="email"
+                            placeholder="Current Password"
+                        />
+                    
+                    <InputText
+                            value={values.email}
+                            defaultValue='' 
+                            errors={errors.email}
+                            touched={touched.email}
+                            onChangeText={handleChange('email')}
+                            onBlur={() => setFieldTouched('email')}
+                            placeholder="New Password"
+                        />
+                    
+                    <InputText
+                            value={values.email}
+                            defaultValue='' 
+                            errors={errors.email}
+                            touched={touched.email}
+                            onChangeText={handleChange('email')}
+                            onBlur={() => setFieldTouched('email')}
+                            placeholder="Confirm Password"
                         />
                     
                     
@@ -99,7 +115,7 @@ return (
                              // navigation.navigate('MainfragScreen')
                              // navData.navigation.navigate('Login');
                         >
-                            <Text>Send</Text>
+                            <Text>Change</Text>
                         </MainButton>
 
                 </View>
@@ -111,16 +127,24 @@ return (
 };
 
 
-export default ForgotPassword
+export default ChangePassword
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        paddingLeft:'7%',
+        paddingRight:'7%',
+        marginTop:'20%',
+        flexDirection:'row',
+        alignItems: 'center',
+    },
+    sub_container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         paddingLeft:'7%',
         paddingRight:'7%',
-        marginTop:'40%'
+        marginTop:'10%'
     },
     passwordview: {
         flex:1,

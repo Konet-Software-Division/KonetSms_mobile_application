@@ -6,6 +6,7 @@ import { Platform } from 'react-native';
 import SplashScreen from '../screens/intro/Splash';
 import OnboardingScreen from '../screens/intro/Onboarding';
 import LoginScreen from '../screens/intro/Login';
+import ChangePasswordScreen from '../screens/intro/ChangePassword';
 import ForgotPasswordScreen from '../screens/intro/ForgotPassword';
 import MainfragScreen from '../screens/fragment/MainFrag'
 import NewContactScreen from '../screens/otherscreen/SendMessage'
@@ -43,6 +44,14 @@ const MainNavigator = createStackNavigator(
     //   },
 
     //  },
+
+    ChangePassword: {
+      screen: ChangePasswordScreen,
+      navigationOptions: {
+        header: null,
+        headerShown: false
+      },
+    },
     Login: {
         screen: LoginScreen,
         navigationOptions: {

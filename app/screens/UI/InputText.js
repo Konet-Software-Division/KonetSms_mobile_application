@@ -28,7 +28,6 @@ const InputText = (props) => {
             {props.touched && props.errors &&
                             <Text style={{ fontSize: 12, color: '#FF0D10' }}>{props.errors}</Text>
                         }
-
         </View>
     )
 

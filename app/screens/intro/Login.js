@@ -12,10 +12,11 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import TextCapton from '../UI/TextCapton';
 import CustomSpinner from '../UI/CustomSpinner';
 import * as loginNetworks from '../../network/AuthenticationNetworks';
-import Snackbar from 'react-native-snackbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearState } from '../../store/AuthenticationSlice';
 import {useNetInfo} from "@react-native-community/netinfo";
+import {CustomsnackBar} from '../../Util/utils';
+
 
 
 
@@ -35,20 +36,15 @@ const Login  = ({navigation})  => {
         }
       }, [isError, isSuccess]);
 
-    CustomsnackBar=(message)  => {
-        Snackbar.show({ text: message, textColor: 'red',
-        backgroundColor: 'black' })
-    }
+
     const handleSubmit = async (values) => {
         
         if(netInfo.isInternetReachable){
             dispatch(loginNetworks.loginUser(values));
         }else{
             alert('PLEASE CONNECT TO INTERNET');
-
         }
 }
-
     //     const handleSubmit = async (values) => {
     //         try {
     //             const resp = await Axiosclient.post('user_service/api/v1/auth/login',{

@@ -2,37 +2,51 @@ import React, { useState, useEffect } from 'react';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { View, StyleSheet,useWindowDimensions,ActivityIndicator,Image } from 'react-native';
 import TextCapton from '../UI/TextCapton';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { useNavigation } from '@react-navigation/native';
 
 const Settings = ({navigation}) => {
 
-  const handleSubmit = async (values) => {
-    navigation.replace('Mainfrag')
+  const handleSubmit = async () => {
+    // navigation.replace('Mainfrag')
 
   }
+
+  // const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
     <View style={styles.container_header}>
         <TextCapton style={{ fontSize: 24, fontWeight: '700'}} text="Settings" /> 
     </View>
+    <TouchableOpacity style={styles.container_subheader}>
+
     <View style={styles.container_subheader}>
     <Image
                   source={require('../../images/settings/select_countries.png')}
                   style={{ height: 20, width: 20 }} />
         <TextCapton style={{ fontSize: 14, fontWeight: '400',marginLeft:20 }} text="Select Countries" /> 
-    </View>
+    </View> 
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.container_subheader}>
+
     <View style={styles.container_subheader}>
-    <Image
-                  source={require('../../images/settings/change_password.png')}
+    <Image source={require('../../images/settings/change_password.png')}
                   style={{ height: 20, width: 20 }} />
         <TextCapton style={{ fontSize: 14, fontWeight: '400',marginLeft:20 }} text="Change Password" /> 
     </View>
+    </TouchableOpacity>
+  
+     <TouchableOpacity  onPress={()=> navigation.navigate('ForgotPassword')}>
     <View style={styles.container_subheader}>
     <Image
                   source={require('../../images/settings/logout.png')}
                   style={{ height: 20, width: 20 }} />
         <TextCapton style={{ fontSize: 14, fontWeight: '400',marginLeft:20 }} text="Logout" /> 
-    </View>
+   </View>  
+   </TouchableOpacity>
+    
+   
    </View>
   );
 }
@@ -59,7 +73,8 @@ const styles = StyleSheet.create({
   container_subheader: {
     alignItems: 'baseline',
     flexDirection: 'row',
-    height: "10%",
+    height: 70,
+    width:"100%",
     alignItems: 'center'
 },
 
