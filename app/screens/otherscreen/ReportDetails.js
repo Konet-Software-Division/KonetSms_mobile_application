@@ -5,6 +5,7 @@ import Colors from '../../constants/colors'
 import TextCapton from '../UI/TextCapton';
 import PopUpModal from '../UI/PopUpModal';
 import { useNavigation } from '@react-navigation/native';
+import {formatDate} from '../../Util/utils';
 
 
 const ReportDetails =({ route }) => {
@@ -37,7 +38,7 @@ const ReportDetails =({ route }) => {
     <View >
     <View style={{flexDirection: 'row'}} >
         <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Cost: " />
-        <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={props.item.cost} />
+        <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={props.item.amount} />
         </View>
         <View style={{flexDirection: 'row', marginTop:27}} >
         <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Volume: " />
@@ -50,11 +51,11 @@ const ReportDetails =({ route }) => {
     <View style={{ marginStart: "1%" }}>
     <View style={{flexDirection: 'row'}} >
         <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="No of Pages: " />
-        <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={props.item.date} />
+        <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={props.item.number_of_pages}/>
         </View>
         <View style={{flexDirection: 'row',marginTop:27}} >
         <TextCapton style={{ fontSize: 14, fontWeight: '700' }} text="Date Created: " />
-        <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={props.item.pageNo} />
+        <TextCapton style={{ fontSize: 14, fontWeight: '500' }} text={formatDate(props.item.created_at)} />
         </View>
      
     </View>
@@ -62,7 +63,8 @@ const ReportDetails =({ route }) => {
 
 </View>
 <TextCapton style={{ fontSize: 14, fontWeight: '700',marginTop:40 }} text="Message: " />
-<TextCapton style={{ fontSize: 14, fontWeight: '400',marginTop:40 }} text='Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.' />
+<TextCapton style={{ fontSize: 14, fontWeight: '400',marginTop:40 }} 
+text={props.item.unit} />
 
 <TouchableOpacity onPress={handleSignUp}> 
 <View style={{ flexDirection: 'row', marginTop:50,justifyContent: 'center'}}> 
@@ -87,11 +89,12 @@ export default ReportDetails
 const styles = StyleSheet.create({
   container: {
       flex: 1,
-      marginTop: '20%',
       flexDirection: 'column',
       backgroundColor:'white',
       paddingLeft: "5%",
-      paddingEnd:"5%"
+      paddingEnd:"5%",
+      paddingTop: '20%',
+
   },
   groups: {
     alignItems: 'center',
@@ -112,6 +115,7 @@ groups_first: {
       alignItems: 'baseline',
       flexDirection: 'row',
       height: "10%",
+      
       alignItems: 'center'
   },
   container_bottom: {

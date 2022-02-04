@@ -116,6 +116,7 @@ const Login  = ({navigation})  => {
                             placeholder="Password"
                             onBlur={() => setFieldTouched('password')}
                             secureTextEntry={true}
+                            // suffiximage='../images/eye.png'
                         />
                     
                         <MainButton

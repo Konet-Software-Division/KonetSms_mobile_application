@@ -45,13 +45,13 @@ const MainNavigator = createStackNavigator(
 
     //  },
 
-    ChangePassword: {
-      screen: ChangePasswordScreen,
-      navigationOptions: {
-        header: null,
-        headerShown: false
-      },
-    },
+    // ChangePassword: {
+    //   screen: ChangePasswordScreen,
+    //   navigationOptions: {
+    //     header: null,
+    //     headerShown: false
+    //   },
+    // },
     Login: {
         screen: LoginScreen,
         navigationOptions: {

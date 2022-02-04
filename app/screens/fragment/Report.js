@@ -33,7 +33,8 @@ const renderTransactionGridItem = itemData => {
     <TouchableOpacity  onPressIn={() => navigation.navigate('ReportDetails',{
     props: itemData})
   }>
-        <View style={[styles.groups, { backgroundColor: itemData.item.id%2==0?Colors.grey:'white' }]}>
+        <View style={[styles.groups, 
+          { backgroundColor: itemData.item.id%2==0?Colors.grey:'white' }]}>
 
           <View style={styles.groups_first}>
               <Image
