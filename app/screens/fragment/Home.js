@@ -11,10 +11,11 @@ import {CustomsnackBar} from '../../Util/utils';
 import PopUpModal from '../UI/PopUpModal';
 import { updateDeletedGroup } from '../../store/GroupSlice';
 import { clearState } from '../../store/GroupSlice';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const Home = ({ navigation })  => {
+const Home = () => {
 
 const [isModalVisible, setIsModalVisible] = useState(false)
 const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const { isFetching, isSuccess, isError, errorMessage,groups} = useSelector(state
 const  {fullName}  = useSelector(state => state.authenticationSlice);
 const [groupName, setGroupName] = useState("")
 const [id, setId] = useState("")
+const navigation = useNavigation(); 
 
 useEffect(() => {
         dispatch(groupNetworks.getGroups() );
@@ -127,9 +129,12 @@ return(
             )}
           </View>
         <View style={styles.bottomView}>
-            <TouchableOpacity
-                activeOpacity={0.7}
-                // onPress={()=> dispatch(groupNetworks.getGroups({ access_token: access_token }  ))}
+        <TouchableOpacity  onPressIn={() => 
+        navigation.navigate('SendMessage')
+  }
+        
+              activeOpacity={0.7}
+            
                 style={styles.touchableOpacityStyle}>
                 <Image
                     // FAB using TouchableOpacity with an image

@@ -64,10 +64,11 @@ const SendMessage =(props) => {
                             placeholder="Sender’s Name"
                             onChangeText={text => Setlastname(text)}
                         />
-                                             <InputText
+                    <InputText
                             value={Phonenumber}
                             defaultValue='' 
                             placeholder="Sender’s Number"
+                            inputtype="numeric"
                             onChangeText={text => Setphonenumber(text)}
                         />
            <TextCapton style={{fontSize: 14, fontWeight:'500', color:Colors.primary

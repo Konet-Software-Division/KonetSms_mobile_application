@@ -7,6 +7,7 @@ import SplashScreen from '../screens/intro/Splash';
 import OnboardingScreen from '../screens/intro/Onboarding';
 import LoginScreen from '../screens/intro/Login';
 import ChangePasswordScreen from '../screens/intro/ChangePassword';
+import SendMessageScreen from '../screens/otherscreen/SendMessage';
 import ForgotPasswordScreen from '../screens/intro/ForgotPassword';
 import MainfragScreen from '../screens/fragment/MainFrag'
 import NewContactScreen from '../screens/otherscreen/SendMessage'
@@ -28,22 +29,22 @@ const defaultNavOptions = {
 
 const MainNavigator = createStackNavigator(
   {
-    // Splash: {
-    //   screen: SplashScreen,
-    //   navigationOptions: {
-    //     header: null,
-    //     headerShown: false
-    //   },
+    Splash: {
+      screen: SplashScreen,
+      navigationOptions: {
+        header: null,
+        headerShown: false
+      },
 
-    // },
-    // Onboarding: {
-    //   screen: OnboardingScreen,
-    //   navigationOptions: {
-    //     header: null,
-    //     headerShown: false
-    //   },
+    },
+    Onboarding: {
+      screen: OnboardingScreen,
+      navigationOptions: {
+        header: null,
+        headerShown: false
+      },
 
-    //  },
+     },
 
     // ChangePassword: {
     //   screen: ChangePasswordScreen,
@@ -85,7 +86,13 @@ const MainNavigator = createStackNavigator(
         },
   
       }, 
-  
+      SendMessage: {
+        screen: SendMessageScreen,
+        navigationOptions: {
+          header: null,
+          headerShown: false
+        },
+      },  
   }, 
   {
     navigationOptions: {

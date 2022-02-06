@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,Image
-} from 'react-native';
+import {StyleSheet,View,Image} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
@@ -14,6 +8,11 @@ import Contacts from './Contacts'
 import Report from './Report'
 import Settings from './Settings'
 import ReportDetails from '../otherscreen/ReportDetails'
+import SendMessage from '../otherscreen/SendMessage'
+import NewContact from '../otherscreen/NewContact'
+import Login from '../intro/Login'
+
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const ReportStack = createNativeStackNavigator();
@@ -28,6 +27,35 @@ const ReportStack = createNativeStackNavigator();
   );
 }
 
+const HomeStackScreen= () => {
+  return (
+    <ReportStack.Navigator 
+    screenOptions={{ headerShown: false, tabBarShowLabel:false }}    >
+      <ReportStack.Screen name="Home" component={Home} />
+      <ReportStack.Screen name="SendMessage" component={SendMessage} />
+    </ReportStack.Navigator>
+  );
+}
+
+const ContactsStackScreen= () => {
+  return (
+    <ReportStack.Navigator 
+    screenOptions={{ headerShown: false, tabBarShowLabel:false }}    >
+      <ReportStack.Screen name="Contacts" component={Contacts} />
+      <ReportStack.Screen name="NewContact" component={NewContact} />
+    </ReportStack.Navigator>
+  );
+}
+
+const SettingsStackScreen= () => {
+  return (
+    <ReportStack.Navigator 
+    screenOptions={{ headerShown: false, tabBarShowLabel:false }}    >
+      <ReportStack.Screen name="Settings" component={Settings} />
+      {/* <ReportStack.Screen name="Login" component={Login} /> */}
+    </ReportStack.Navigator>
+  );
+}
 const Tab = createBottomTabNavigator();
 
 const MainFrag= () => {
@@ -37,9 +65,9 @@ const MainFrag= () => {
         <Tab.Navigator
         screenOptions={{ headerShown: false, tabBarShowLabel:false }}      
         >
-              <Tab.Screen
+              <Tab.Screen 
           name="HomeActiviy"
-          component={Home}
+          component={HomeStackScreen}
           options={{
             title: '', //Set Header Title
             tabBarIcon: ({ focused }) => (
@@ -57,7 +85,7 @@ const MainFrag= () => {
           }}/>
           <Tab.Screen
           name="contacts"
-          component={Contacts}
+          component={ContactsStackScreen}
           options={{
             title: '', //Set Header Title
             tabBarIcon: ({ focused }) => (
@@ -93,7 +121,7 @@ const MainFrag= () => {
           }}/>
           <Tab.Screen
           name="Settings"
-          component={Settings}
+          component={SettingsStackScreen}
           options={{
             title: '', //Set Header Title
             tabBarIcon: ({ focused }) => (

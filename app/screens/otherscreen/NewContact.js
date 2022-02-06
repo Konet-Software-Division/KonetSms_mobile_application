@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet,Button,Image } from 'react-native';
+import { Text, View, StyleSheet,TouchableOpacity,Image } from 'react-native';
 import Colors from '../../constants/colors'
 import InputText from '../UI/InputText';
 import calender from '../../images/calendar.png'
 import dropdown from '../../images/dropdown.png'
 import MainButton from '../UI/MainButton';
 import { ScrollView } from 'react-native-gesture-handler';
-import Dropdownlist from './Dropdownlist'
+import Dropdownlist from '../UI/Dropdownlist'
 import TextCapton from '../UI/TextCapton';
 
 
@@ -41,11 +41,11 @@ const NewContact =(props) => {
 
 
 <TextCapton style={styles.header_text} text="New Contact" />
-
+<TouchableOpacity  onPressIn={() => navigation.goBack()}> 
 <Image
           source={require('../../images/white_back.png')}
                     style={{height:0,width:0,     alignSelf:'center' }} />
-                    
+</TouchableOpacity>                     
 </View>
 <ScrollView>
 

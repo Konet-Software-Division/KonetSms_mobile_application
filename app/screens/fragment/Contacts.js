@@ -74,6 +74,7 @@ const renderContactGridItem = itemData => {
 
 const Contacts = ({ navigation }) => {
     const [ContactState, setContactState] = useState(true);
+    const [TitleState, setTitleState] = useState("Contacts");
 
 
     const dispatch = useDispatch();
@@ -92,18 +93,27 @@ const Contacts = ({ navigation }) => {
        
       }, [isError,contactslice.isError]);
 
+     const changeTitle=()=>{
+        setContactState(!ContactState)
+        if(ContactState){
+            setTitleState("Groups")
+        }else{
+            setTitleState("Contacts")
+        }
+
+     } 
     return (
 
         <View style={styles.container}>
             <View style={styles.container_header}>
-                <TextCapton style={{ fontSize: 24, fontWeight: '700' }} text="Contacts" />
+                <TextCapton style={{ fontSize: 24, fontWeight: '700' }} text={TitleState}/>
                 <ButtonImageText
                     style={{
                         marginVertical: 20
                     }}
-                    title='Add contacts'
+                    title= {'Add '+ TitleState}
                     onPress={() => {
-                        navData.navigation.navigate('Login');
+                        navigation.navigate('NewContact');
                     }}
                 />
             </View>
@@ -134,7 +144,9 @@ const Contacts = ({ navigation }) => {
             <View style={styles.container_bottom}>
                 <TouchableOpacity
                onPress={() => {
-                setContactState(true)
+               
+                changeTitle()
+                // setTitleState("Contacts")
             }}
                 >
                     <Text style={styles.textStyle}>Contacts</Text>
@@ -144,7 +156,10 @@ const Contacts = ({ navigation }) => {
                     style={{ height: 24, width: 2, marginHorizontal:12 }} />
                 <TouchableOpacity
                  onPress={() => {
-                    setContactState(false)
+                    changeTitle()
+            
+                    // setTitleState("Groups")
+
                 }}
                 >
                     <Text style={styles.textStyle}>Groups</Text>

@@ -32,7 +32,7 @@ const Login  = ({navigation})  => {
         } 
         if (isSuccess) {
           dispatch(clearState());
-          navigation.replace('Mainfrag')
+          navigation.push('Mainfrag')
         }
       }, [isError, isSuccess]);
 

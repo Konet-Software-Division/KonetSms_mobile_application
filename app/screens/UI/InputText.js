@@ -13,6 +13,8 @@ const InputText = (props) => {
         <View style={styles.input}>  
             <TextInput
               value={props.values}
+              keyboardType={props.inputtype}
+
               defaultValue={props.defaultValue}
               style={{ ...styles.Text_input, ...props.style }}
               onChangeText={props.onChangeText}

@@ -24,7 +24,7 @@ const ReportDetails =({ route }) => {
   return (
     <View style={styles.container}>
     <View style={styles.container_header}>
-    <TouchableOpacity  onPressIn={() => navigation.goBack()}> 
+    <TouchableOpacity  onPressIn={() => navigation.popToTop()}> 
     <Image source={require('../../images/report/back.png')}
                     style={{ height: 15, width: 7}} />
                     </TouchableOpacity>
