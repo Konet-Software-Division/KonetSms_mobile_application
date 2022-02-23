@@ -6,6 +6,7 @@ import { Platform } from 'react-native';
 import SplashScreen from '../screens/intro/Splash';
 import OnboardingScreen from '../screens/intro/Onboarding';
 import LoginScreen from '../screens/intro/Login';
+
 import ChangePasswordScreen from '../screens/intro/ChangePassword';
 import SendMessageScreen from '../screens/otherscreen/SendMessage';
 import ForgotPasswordScreen from '../screens/intro/ForgotPassword';

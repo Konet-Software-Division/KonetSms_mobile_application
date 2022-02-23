@@ -3,14 +3,10 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { View, StyleSheet,useWindowDimensions,ActivityIndicator,Image } from 'react-native';
 import TextCapton from '../UI/TextCapton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation ,StackActions} from '@react-navigation/native';
+import { useNavigation ,StackActions,useNavigationContainerRef} from '@react-navigation/native';
 
-const Settings = () => {
+const Settings = (props) => {
 const navigation = useNavigation();
-  const handleSubmit = async () => {
-    // navigation.replace('Login')
-    navigation.dispatch(StackActions.popToTop()); 
-  }
 
   return (
     <View style={styles.container}>
@@ -35,9 +31,16 @@ const navigation = useNavigation();
     </View>
     </TouchableOpacity>
   
-     <TouchableOpacity  onPress={()=>  navigation.dispatch(StackActions.popToTop())}>
-    <View style={styles.container_subheader}>
-    <Image
+     <TouchableOpacity  onPress={()=> 
+            //  props.navigation.pop()
+            //  navigation.pop()
+
+            props.navigation.push('Login')
+              
+      }>
+
+    <View style={styles.container_subheader}> 
+    <Image 
                   source={require('../../images/settings/logout.png')}
                   style={{ height: 20, width: 20 }} />
         <TextCapton style={{ fontSize: 14, fontWeight: '400',marginLeft:20 }} text="Logout" /> 

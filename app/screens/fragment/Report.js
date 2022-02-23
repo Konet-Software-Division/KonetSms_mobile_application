@@ -118,8 +118,7 @@ const renderTabBar = props => (
       activeColor={Colors.primary}
       inactiveColor={Colors.primary}
       style={{marginTop:25,backgroundColor:'white',marginRight:30,marginLeft:30}}
-      indicatorStyle={{backgroundColor:Colors.lightblue, height:4
-      }}
+      indicatorStyle={{backgroundColor:Colors.lightblue, height:4}}
   />
 );
 

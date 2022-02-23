@@ -14,7 +14,7 @@ const InputText = (props) => {
             <TextInput
               value={props.values}
               keyboardType={props.inputtype}
-
+              
               defaultValue={props.defaultValue}
               style={{ ...styles.Text_input, ...props.style }}
               onChangeText={props.onChangeText}
@@ -63,7 +63,10 @@ const styles = StyleSheet.create({
         width: '90%',
         borderRadius:10,
         flexDirection:'row',
-        marginStart:5
+        marginStart:5,
+        fontSize: 14,
+        fontWeight:'500',
+        color:Colors.primary 
     },
     errorContainer: {
         marginVertical: 5
@@ -72,6 +75,7 @@ const styles = StyleSheet.create({
         // fontFamily: 'Campton',
         color: 'red',
         fontSize: 13
-    }
+    },
+   
 })
 export default InputText

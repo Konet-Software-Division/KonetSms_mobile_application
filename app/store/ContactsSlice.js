@@ -15,14 +15,14 @@ const getContactsSlice  = createSlice({
   },
   extraReducers: {
     [contactsNetworks.getContacts.fulfilled]: (state, { payload }) => {
-      console.log('getContacts_payload', payload.contacts);
+      // console.log('getContacts_payload', payload.contacts);
       state.contacts = payload.contacts;
       state.isFetching = false;
       state.isSuccess = true;
       return state;
     },
     [contactsNetworks.getContacts.rejected]: (state, { payload }) => {
-      console.log('getContacts_payload', payload);
+      // console.log('getContacts_payload', payload);
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;

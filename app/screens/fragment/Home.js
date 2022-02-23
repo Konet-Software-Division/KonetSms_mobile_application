@@ -40,9 +40,7 @@ const deleteGroupFromList=() => {
         }  
         if(isSuccess){
          dispatch(updateDeletedGroup(id));
-        } 
-       
-        
+        }        
 }
 
 const renderGridItem = itemData => {

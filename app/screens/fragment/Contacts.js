@@ -7,6 +7,7 @@ import GroupsModel from '../../model/GroupsModel';
 import Colors from '../../constants/colors'
 import ButtonImageText from '../UI/ButtonImageText';
 import FlatListUI from '../UI/FlatListUI';
+import { useIsFocused } from '@react-navigation/native';
 
 import * as groupNetworks from '../../network/GroupNetworks';
 import * as contactsNetworks from '../../network/ContactsNetworks';
@@ -72,10 +73,11 @@ const renderContactGridItem = itemData => {
 };
 
 
-const Contacts = ({ navigation }) => {
+const Contacts = ( props ) => {
     const [ContactState, setContactState] = useState(true);
     const [TitleState, setTitleState] = useState("Contacts");
 
+    const isFocused = useIsFocused();
 
     const dispatch = useDispatch();
     const contactslice= useSelector(state => state.getContactsSlice);
@@ -91,7 +93,7 @@ const Contacts = ({ navigation }) => {
             CustomsnackBar(errorMessage,'red');
           }
        
-      }, [isError,contactslice.isError]);
+      }, [isError,contactslice.isError,isFocused]);
 
      const changeTitle=()=>{
         setContactState(!ContactState)
@@ -113,7 +115,7 @@ const Contacts = ({ navigation }) => {
                     }}
                     title= {'Add '+ TitleState}
                     onPress={() => {
-                        navigation.navigate('NewContact');
+                        props.navigation.navigate('NewContact');
                     }}
                 />
             </View>

@@ -46,19 +46,24 @@ const ContactsStackScreen= () => {
     </ReportStack.Navigator>
   );
 }
+// props.navigation.push('Login')
 
-const SettingsStackScreen= () => {
+const SettingsStackScreen= (props) => {
   return (
+          // <ReportStack.Screen name="Settings" component={Settings} />
+
+
     <ReportStack.Navigator 
     screenOptions={{ headerShown: false, tabBarShowLabel:false }}    >
       <ReportStack.Screen name="Settings" component={Settings} />
       {/* <ReportStack.Screen name="Login" component={Login} /> */}
     </ReportStack.Navigator>
   );
-}
+} 
+
 const Tab = createBottomTabNavigator();
 
-const MainFrag= () => {
+const MainFrag= (props) => {
   return (
 
 <NavigationContainer  style={styles.container}>
