@@ -2,7 +2,7 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import * as contactsNetworks from '../network/ContactsNetworks.js';
 
 
-const getContactsSlice  = createSlice({
+export const getContactsSlice  = createSlice({
    name: 'get_contact',
   initialState: {
     contacts: [],

@@ -28,7 +28,7 @@ const Calender =  props => {
       }
       
 
-      const dateStr = `${day}-${month}-${year}`
+      const dateStr = `${year}-${month}-${day}`
      props.val(dateStr)
 
       return <Text style={styles.selectedItem}>{dateStr}</Text>

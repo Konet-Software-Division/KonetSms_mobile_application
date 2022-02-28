@@ -15,6 +15,8 @@ import {useNetInfo} from "@react-native-community/netinfo";
 import * as yup from 'yup'
 import { Formik } from 'formik'
 import { useNavigation } from '@react-navigation/native';
+import {CustomsnackBar} from '../../Util/utils';
+import { clearState } from '../../store/GroupSlice';
 
 
 
@@ -22,7 +24,9 @@ import { useNavigation } from '@react-navigation/native';
 const NewContact =(props) => {
     const dispatch = useDispatch();
     const netInfo = useNetInfo();
-    const { isFetching, isSuccess, isError, errorMessage } = useSelector(state => state.getContactsSlice);
+    const { isFetching, isSuccess, isError, errorMessage } = 
+    useSelector(state => state.addContactSlice);
+
     // const navigation = useNavigation();
 
     // const [selectedLanguage, setSelectedLanguage] = useState();
@@ -32,18 +36,22 @@ const NewContact =(props) => {
     const options = ['Male','Female']
 
     useEffect(() => {
+        dispatch(clearState());
+        console.log(isSuccess)
         if (isError) {
           CustomsnackBar(errorMessage);
         }  
+
         if (isSuccess) {
-        //   navigation.push('Mainfrag')
+          props.navigation.goBack()
         }
       }, [isError, isSuccess]);
+      
     const handleSubmit = async (values) => {
         
         if(netInfo.isInternetReachable){
            
-            dispatch(ContactsNetworks.createGroup(values));
+            dispatch(ContactsNetworks.addContact(values));
         }else{
             alert('PLEASE CONNECT TO INTERNET');
         }

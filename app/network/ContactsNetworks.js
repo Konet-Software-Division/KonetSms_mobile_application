@@ -4,37 +4,23 @@ import Axiosclient from '../HttpClient'
 
 
 
-export const createGroup = createAsyncThunk(
-  'createGroups',
+export const addContact = createAsyncThunk(
+  'addContact',
   async ( values, thunkAPI) => {
+    console.log("values")
+    console.log(values)
     try {
-      console.log("values")
-      console.log(values)
-    //   const response = await Axiosclient.post('contact_service/api/v1/contacts/create',
-    //   {
-    //     "firstName" : values.firstName,
-    //     "lastName" : values.lastName,
-    //     "dob" : values.dob,
-    //     "gender" : values.gender,
-    //     "phone" : values.phone,
-    //     "groups" : values.groups,
-    // }
-    //  );
-
-    //   return response.data ;
-      
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e);
+    
+      const response = await Axiosclient.post('contact_service/api/v1/contacts/create',
+      {
+        "firstName" : values.firstName,
+        "lastName" : values.lastName,
+        "dob" : values.dob,
+        "gender" : values.gender,
+        "phone" : values.phone,
+        "groups" : values.groups,
     }
-  }
-);
-
-export const getGroups = createAsyncThunk(
-  'getgroups',
-  async ( thunkAPI) => {
-    try {
- 
-      const response = await Axiosclient.get('contact_service/api/v1/contacts/fetch-all-groups');
+     );
 
       return response.data ;
       
@@ -43,6 +29,22 @@ export const getGroups = createAsyncThunk(
     }
   }
 );
+
+
+// export const getGroups = createAsyncThunk(
+//   'getgroups',
+//   async ( thunkAPI) => {
+//     try {
+ 
+//       const response = await Axiosclient.get('contact_service/api/v1/contacts/fetch-all-groups');
+
+//       return response.data ;
+      
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e);
+//     }
+//   }
+// );
 
 export const deleteContact= createAsyncThunk(
   'deleteContact',
