@@ -5,9 +5,7 @@ import TextCapton from '../UI/TextCapton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation ,StackActions,useNavigationContainerRef} from '@react-navigation/native';
 
-const Settings = (props) => {
-const navigation = useNavigation();
-
+const Settings = props => {
   return (
     <View style={styles.container}>
     <View style={styles.container_header}>
@@ -35,7 +33,7 @@ const navigation = useNavigation();
             //  props.navigation.pop()
             //  navigation.pop()
 
-            props.navigation.push('Login')
+            props.navigation.navigate('Login')
               
       }>
 

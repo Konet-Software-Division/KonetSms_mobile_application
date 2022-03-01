@@ -1,6 +1,7 @@
 import React, { useState,useEffect, Component } from 'react';
 import Constant from '../../constants/constant'
 import axios from 'axios';
+import {NavigationContainer} from '@react-navigation/native'
 
 import MainButton from '../UI/MainButton';
 import InputText from '../UI/InputText';
@@ -64,6 +65,7 @@ const Login  = ({navigation})  => {
     //  }
     
     return (
+
 <ScrollView style={{ backgroundColor: '#fff'}}>
 <View style={styles.container}>
     

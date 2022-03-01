@@ -30,7 +30,7 @@ const Report = () => {
 const renderTransactionGridItem = itemData => {
   
   return (
-    <TouchableOpacity  onPressIn={() =>
+    <TouchableOpacity  onPress={() =>
        navigation.navigate('ReportDetails',{
     props: itemData})
   }>

@@ -25,7 +25,7 @@ export const addContactsSlice  = createSlice({
        // console.log('getContacts_payload', payload);
        state.isFetching = false;
        state.isError = true;
-       state.errorMessage = payload.message;
+       state.errorMessage = payload.status;
      },
      [contactsNetworks.addContact.pending]: (state) => {
        state.isFetching = true;

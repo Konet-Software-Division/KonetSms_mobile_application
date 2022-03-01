@@ -33,13 +33,11 @@ const NewContact =(props) => {
 
     const {groups} = useSelector(state => state.getGroupSlice);
 
-    const options = ['Male','Female']
+    const options = ['male','female']
 
     useEffect(() => {
-        dispatch(clearState());
-        console.log(isSuccess)
         if (isError) {
-          CustomsnackBar(errorMessage);
+          CustomsnackBar(errorMessage,"red");
         }  
 
         if (isSuccess) {

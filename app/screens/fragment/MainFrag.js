@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet,View,Image} from 'react-native';
-
 import {NavigationContainer} from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Home from './Home'
@@ -51,8 +50,6 @@ const ContactsStackScreen= () => {
 const SettingsStackScreen= (props) => {
   return (
           // <ReportStack.Screen name="Settings" component={Settings} />
-
-
     <ReportStack.Navigator 
     screenOptions={{ headerShown: false, tabBarShowLabel:false }}    >
       <ReportStack.Screen name="Settings" component={Settings} />
@@ -63,10 +60,10 @@ const SettingsStackScreen= (props) => {
 
 const Tab = createBottomTabNavigator();
 
-const MainFrag= (props) => {
+const MainFrag= props => {
   return (
 
-<NavigationContainer  style={styles.container}>
+<View  style={styles.container}>
         <Tab.Navigator
         screenOptions={{ headerShown: false, tabBarShowLabel:false }}      
         >
@@ -144,7 +141,7 @@ const MainFrag= (props) => {
           }}/>
      
         </Tab.Navigator>
-      </NavigationContainer>
+      </View>
   );
 };
 

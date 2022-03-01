@@ -8,23 +8,30 @@ export const addContact = createAsyncThunk(
   'addContact',
   async ( values, thunkAPI) => {
     console.log("values")
-    console.log(values)
+    console.log(values.phonenumber)
     try {
     
       const response = await Axiosclient.post('contact_service/api/v1/contacts/create',
       {
-        "firstName" : values.firstName,
-        "lastName" : values.lastName,
+        "firstName" : values.firstname,
+        "lastName" : values.lastname,
         "dob" : values.dob,
         "gender" : values.gender,
-        "phone" : values.phone,
-        "groups" : values.groups,
+        "phone" : values.phonenumber,
+        "groups" : ["60c8905c41cfe8eeaa17a183"]
+        // "firstName" : "Something 2",
+        // "lastName" : "Honest",
+        // "dob" : "2019-12-01",
+        // "gender" : "male",
+        // "phone" : "08177171791",
+        // "groups" : ["60b9ec2841cfe8608217a181"]
     }
      );
-
+      console.log(response.data)
       return response.data ;
       
     } catch (e) {
+      console.log(e)
       return thunkAPI.rejectWithValue(e);
     }
   }
